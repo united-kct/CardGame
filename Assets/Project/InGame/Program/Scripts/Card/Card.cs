@@ -1,10 +1,8 @@
 #nullable enable
 
-using UnityEngine;
-
 namespace InGame
 {
-    public class Card : MonoBehaviour
+    public class Card
     {
         public CardHand Hand { get; private set; }
         public CardType Type { get; private set; }
@@ -15,16 +13,6 @@ namespace InGame
             Hand = hand;
             Type = type;
             Power = power;
-        }
-
-        // Start is called before the first frame update
-        private void Start()
-        {
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {
         }
     }
 

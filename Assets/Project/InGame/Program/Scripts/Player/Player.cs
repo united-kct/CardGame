@@ -1,10 +1,8 @@
 #nullable enable
 
-using UnityEngine;
-
 namespace InGame
 {
-    public class Player : MonoBehaviour
+    public class Player
     {
         public int Hp { get; set; }
         public Card Card { get; private set; }

@@ -5,12 +5,17 @@ namespace InGame
     public class Player
     {
         public int Hp { get; set; }
-        public Card Card { get; private set; }
+        public Card? CurrentCard { get; private set; }
 
-        public Player(int hp, Card card)
+        public Player(int hp)
         {
             Hp = hp;
-            Card = card;
+        }
+
+        // TODO: 実際には読み込んで分かった id からデータを取得し、取得できなかった場合はエラーを返す。
+        public void SetCurrentCard(Card card)
+        {
+            CurrentCard = card;
         }
     }
 }

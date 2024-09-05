@@ -12,14 +12,8 @@ namespace InGame
         {
             int maxHp = 3000;
 
-            FirstPlayer = new(
-                maxHp,
-                new(CardHand.Paper, CardType.Fire, 1000)
-            );
-            SecondPlayer = new(
-                maxHp,
-                new(CardHand.Scissors, CardType.Grass, 500)
-            );
+            FirstPlayer = new(maxHp);
+            SecondPlayer = new(maxHp);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace InGame
         {
             _gameSettings = new();
 
-            _turn.Initialize(_gameSettings.FirstPlayer, _gameSettings.SecondPlayer);
+            _turn.Initialize(_gameSettings.FirstPlayer, _gameSettings.SecondPlayer, _gameSettings.MaxTurn);
         }
 
         // Update is called once per frame

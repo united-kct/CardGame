@@ -6,14 +6,17 @@ namespace InGame
     {
         public Player FirstPlayer { get; private set; }
         public Player SecondPlayer { get; private set; }
+        public int MaxHp { get; private set; }
+        public int MaxTurn { get; private set; }
 
         // TODO: 実際はマスターデータから取得する
         public GameSettings()
         {
-            int maxHp = 3000;
+            MaxHp = 3000;
+            MaxTurn = 3;
 
-            FirstPlayer = new(maxHp);
-            SecondPlayer = new(maxHp);
+            FirstPlayer = new(MaxHp);
+            SecondPlayer = new(MaxHp);
         }
     }
 }

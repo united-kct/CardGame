@@ -8,15 +8,15 @@ namespace InGame
 {
     public class Turn : MonoBehaviour
     {
-        private Player _firstPlayer = null!;
-        private Player _secondPlayer = null!;
+        private Player _player = null!;
+        private Player _opponentPlayer = null!;
         private int _maxTurn;
         private int _turn = 1;
 
-        public void Initialize(Player firstPlayer, Player secondPlayer, int maxTurn)
+        public void Initialize(Player player, Player opponentPlayer, int maxTurn)
         {
-            _firstPlayer = firstPlayer;
-            _secondPlayer = secondPlayer;
+            _player = player;
+            _opponentPlayer = opponentPlayer;
             _maxTurn = maxTurn;
 
             CancellationToken ct = this.GetCancellationTokenOnDestroy();
@@ -30,8 +30,8 @@ namespace InGame
                 // TODO: 実際にはカードを読み込み終わるまで待つ
                 Debug.Log($"turn: {_turn}");
                 Debug.Log("実際にはカードを読み込み終わるまで待つ");
-                _firstPlayer.SetCurrentCard(new(CardHand.Paper, CardType.Fire, 400));
-                _secondPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
+                _player.SetCurrentCard(new(CardHand.Paper, CardType.Fire, 400));
+                _opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
                 await UniTask.DelayFrame(120, PlayerLoopTiming.FixedUpdate, ct);
 
                 CompareCard();

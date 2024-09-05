@@ -4,8 +4,8 @@ namespace InGame
 {
     public class GameSettings
     {
-        public Player FirstPlayer { get; private set; }
-        public Player SecondPlayer { get; private set; }
+        public Player Player { get; private set; }
+        public Player OpponentPlayer { get; private set; }
         public int MaxHp { get; private set; }
         public int MaxTurn { get; private set; }
 
@@ -15,8 +15,8 @@ namespace InGame
             MaxHp = 3000;
             MaxTurn = 3;
 
-            FirstPlayer = new(MaxHp);
-            SecondPlayer = new(MaxHp);
+            Player = new(MaxHp);
+            OpponentPlayer = new(MaxHp);
         }
     }
 }

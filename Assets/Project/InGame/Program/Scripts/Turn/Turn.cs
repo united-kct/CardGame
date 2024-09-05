@@ -1,4 +1,4 @@
-#nullable enable
+ï»¿#nullable enable
 
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace InGame
             Debug.Log("Turn Initialized");
         }
 
-        // hand, type ‚©‚çŸ”s‚Æ‘Š«‚ğ”»’è‚µAhp ‚ğŒ¸‚ç‚·
+        // hand, type ã‹ã‚‰å‹æ•—ã¨ç›¸æ€§ã‚’åˆ¤å®šã—ã€hp ã‚’æ¸›ã‚‰ã™
         private void CompareCard()
         {
         }

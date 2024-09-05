@@ -1,4 +1,4 @@
-#nullable enable
+ï»¿#nullable enable
 
 namespace InGame
 {
@@ -12,7 +12,7 @@ namespace InGame
             Hp = hp;
         }
 
-        // TODO: ÀÛ‚É‚Í“Ç‚İ‚ñ‚Å•ª‚©‚Á‚½ id ‚©‚çƒf[ƒ^‚ğæ“¾‚µAæ“¾‚Å‚«‚È‚©‚Á‚½ê‡‚ÍƒGƒ‰[‚ğ•Ô‚·B
+        // TODO: å®Ÿéš›ã«ã¯èª­ã¿è¾¼ã‚“ã§åˆ†ã‹ã£ãŸ id ã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã—ã€å–å¾—ã§ããªã‹ã£ãŸå ´åˆã¯ã‚¨ãƒ©ãƒ¼ã‚’è¿”ã™ã€‚
         public void SetCurrentCard(Card card)
         {
             CurrentCard = card;

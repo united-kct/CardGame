@@ -1,4 +1,4 @@
-#nullable enable
+ï»¿#nullable enable
 
 namespace InGame
 {
@@ -7,7 +7,7 @@ namespace InGame
         public Player FirstPlayer { get; private set; }
         public Player SecondPlayer { get; private set; }
 
-        // TODO: ÀÛ‚Íƒ}ƒXƒ^[ƒf[ƒ^‚©‚çæ“¾‚·‚é
+        // TODO: å®Ÿéš›ã¯ãƒã‚¹ã‚¿ãƒ¼ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰å–å¾—ã™ã‚‹
         public GameSettings()
         {
             int maxHp = 3000;

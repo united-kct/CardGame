@@ -9,7 +9,7 @@ namespace Common
     public class WebCamera : MonoBehaviour
     {
         [SerializeField] private RawImage _cameraScreen = null!;
-        [SerializeField] private TextMeshProUGUI _resultText = null!;
+        [SerializeField] private TextMeshProUGUI _qrScanResult = null!;
         private WebCamTexture? _webCamTexture;
         private bool _isCameraVisible = false;
 
@@ -20,7 +20,10 @@ namespace Common
 
         private void Update()
         {
-            _resultText.text = QRCodeReader.ReadQRCodeWebCameraTexture(_webCamTexture);
+            if (_webCamTexture != null)
+            {
+                _qrScanResult.text = QRCodeReader.ReadQRCodeWebCameraTexture(_webCamTexture);
+            }
         }
 
         public void HandleClick()
@@ -28,13 +31,13 @@ namespace Common
             if (_isCameraVisible)
             {
                 _cameraScreen.gameObject.SetActive(false);
-                _resultText.gameObject.SetActive(false);
+                _qrScanResult.gameObject.SetActive(false);
                 _isCameraVisible = false;
             }
             else
             {
                 _cameraScreen.gameObject.SetActive(true);
-                _resultText.gameObject.SetActive(true);
+                _qrScanResult.gameObject.SetActive(true);
                 _isCameraVisible = true;
             }
         }
@@ -48,7 +51,7 @@ namespace Common
                 autoFocusPoint = new Vector2(width * 0.5f, height * 0.5f)
             };
             _cameraScreen.gameObject.SetActive(false);
-            _resultText.gameObject.SetActive(false);
+            _qrScanResult.gameObject.SetActive(false);
             _cameraScreen.texture = _webCamTexture;
             _webCamTexture.Play();
         }

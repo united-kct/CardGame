@@ -12,14 +12,13 @@ namespace Common
         [SerializeField] private TextMeshProUGUI _buttonText = null!;
         [SerializeField] private TextMeshProUGUI _resultText = null!;
         private WebCamTexture? _webCamTexture;
-        private QRCodeReader _qrCodeReader = new();
         private bool _isCameraStart = false;
 
         private void Update()
         {
             if (_isCameraStart)
             {
-                _resultText.text = _qrCodeReader?.ReadQRCodeWebCamTexture(_webCamTexture);
+                _resultText.text = QRCodeReader.ReadQRCodeWebCameraTexture(_webCamTexture);
             }
         }
 

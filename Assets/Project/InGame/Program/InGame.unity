@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 922502006}
   - component: {fileID: 922502005}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: CameraScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -587,7 +587,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraScreen: {fileID: 922502005}
-  _buttonText: {fileID: 2066863016}
   _resultText: {fileID: 1335980963}
 --- !u!1 &1244062838
 GameObject:
@@ -602,7 +601,7 @@ GameObject:
   - component: {fileID: 1244062841}
   - component: {fileID: 1244062840}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ToggleCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -625,8 +624,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -263, y: -70}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -338.73, y: -127.063}
+  m_SizeDelta: {x: 50, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1244062840
 MonoBehaviour:
@@ -734,7 +733,7 @@ GameObject:
   - component: {fileID: 1335980964}
   - component: {fileID: 1335980963}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: QRScanResult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -760,10 +759,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "QR\u306E\u8AAD\u307F\u53D6\u308A\u7D50\u679C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b01049c75e280684ab717a9392378080, type: 2}
+  m_sharedMaterial: {fileID: 4467328529239798860, guid: b01049c75e280684ab717a9392378080, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -787,8 +786,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1207,7 +1206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "QR\u3092\u3088\u307F\u3053\u3080"
+  m_text: "\u30AB\u30E1\u30E9\u3092\n\u5207\u308A\u66FF\u3048"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b01049c75e280684ab717a9392378080, type: 2}
   m_sharedMaterial: {fileID: 4467328529239798860, guid: b01049c75e280684ab717a9392378080, type: 2}
@@ -1234,8 +1233,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

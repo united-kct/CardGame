@@ -9,49 +9,48 @@ namespace Common
     public class WebCamera : MonoBehaviour
     {
         [SerializeField] private RawImage _cameraScreen = null!;
-        [SerializeField] private TextMeshProUGUI _buttonText = null!;
         [SerializeField] private TextMeshProUGUI _resultText = null!;
         private WebCamTexture? _webCamTexture;
-        private bool _isCameraStart = false;
+        private bool _isCameraVisible = false;
+
+        private void Start()
+        {
+            StartCamera();
+        }
 
         private void Update()
         {
-            if (_isCameraStart)
-            {
-                _resultText.text = QRCodeReader.ReadQRCodeWebCameraTexture(_webCamTexture);
-            }
+            _resultText.text = QRCodeReader.ReadQRCodeWebCameraTexture(_webCamTexture);
         }
 
         public void HandleClick()
         {
-            if (!_isCameraStart)
+            if (_isCameraVisible)
             {
-                StartCamera();
+                _cameraScreen.gameObject.SetActive(false);
+                _resultText.gameObject.SetActive(false);
+                _isCameraVisible = false;
             }
             else
             {
-                _resultText.text = string.Empty;
-                _webCamTexture?.Stop();
-                _buttonText.text = "Start Camera";
-                _isCameraStart = false;
+                _cameraScreen.gameObject.SetActive(true);
+                _resultText.gameObject.SetActive(true);
+                _isCameraVisible = true;
             }
         }
 
         private void StartCamera()
         {
-            if (_webCamTexture == null)
+            float width = _cameraScreen.rectTransform.rect.width;
+            float height = _cameraScreen.rectTransform.rect.height;
+            _webCamTexture = new((int)width, (int)height)
             {
-                float width = _cameraScreen.rectTransform.rect.width;
-                float height = _cameraScreen.rectTransform.rect.height;
-                _webCamTexture = new((int)width, (int)height)
-                {
-                    autoFocusPoint = new Vector2(width * 0.5f, height * 0.5f)
-                };
-                _cameraScreen.texture = _webCamTexture;
-            }
+                autoFocusPoint = new Vector2(width * 0.5f, height * 0.5f)
+            };
+            _cameraScreen.gameObject.SetActive(false);
+            _resultText.gameObject.SetActive(false);
+            _cameraScreen.texture = _webCamTexture;
             _webCamTexture.Play();
-            _buttonText.text = "Stop Camera";
-            _isCameraStart = true;
         }
     }
 }

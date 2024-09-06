@@ -15,5 +15,19 @@ namespace Common
 
             return r != null ? r.Text : string.Empty;
         }
+
+        public string ReadQRCodeWebCamTexture(WebCamTexture? tex)
+        {
+            if (tex == null)
+            {
+                return string.Empty;
+            }
+
+            BarcodeReader reader = new();
+            // 読み込み
+            ZXing.Result r = reader.Decode(tex.GetPixels32(), tex.width, tex.height);
+
+            return r != null ? r.Text : string.Empty;
+        }
     }
 }

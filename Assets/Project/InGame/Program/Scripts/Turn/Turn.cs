@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using Common.QRCode;
 using Cysharp.Threading.Tasks;
 using R3;
 using R3.Triggers;
@@ -16,6 +17,7 @@ namespace InGame
         private int _turn = 1;
         private bool _isCardLoading;
         [SerializeField] private GameObject _cardLoadingUI = null!;
+        [SerializeField] private WebCamera _webCamera = null!;
 
         public void Initialize(Player player, Player opponentPlayer, int maxTurn)
         {
@@ -45,13 +47,14 @@ namespace InGame
         {
             while (_turn <= _maxTurn)
             {
-                // TODO: 実際にはカードを読み込み終わるまで待つ
                 _isCardLoading = true;
                 Debug.Log($"turn: {_turn}");
-                Debug.Log("実際にはカードを読み込み終わるまで待つ");
-                _player.SetCurrentCard(new(CardHand.Paper, CardType.Fire, 400));
-                _opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
-                await UniTask.DelayFrame(120, PlayerLoopTiming.FixedUpdate, ct);
+                //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
+                await UniTask.WaitUntil(() =>
+                {
+                    var result = _player.SetCurrentCard(_webCamera.QrScanResult, new(CardHand.Paper, CardType.Fire, 400));
+                    return result.IsOk;
+                }, cancellationToken: ct);
 
                 _isCardLoading = false;
                 CompareCard();

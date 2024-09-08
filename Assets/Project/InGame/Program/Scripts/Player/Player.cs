@@ -1,5 +1,7 @@
 ﻿#nullable enable
 
+using Common.Result;
+
 namespace InGame
 {
     public class Player
@@ -13,9 +15,17 @@ namespace InGame
         }
 
         // TODO: 実際には読み込んで分かった id からデータを取得し、取得できなかった場合はエラーを返す。
-        public void SetCurrentCard(Card card)
+        public Result<Card, string> SetCurrentCard(string id, Card card)
         {
-            CurrentCard = card;
+            if (id == string.Empty)
+            {
+                return "id is empty";
+            }
+            else
+            {
+                CurrentCard = card;
+                return card;
+            }
         }
     }
 }

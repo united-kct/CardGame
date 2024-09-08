@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraScreen: {fileID: 922502005}
-  _qrScanResult: {fileID: 1335980963}
+  _qrScanResultUI: {fileID: 1335980963}
 --- !u!1 &1244062838
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable SA1649 // File name should match first type name
 
-namespace MessagePack.Formatters.Common.MasterData
+namespace Generated.MasterData.Formatters.Common.MasterData
 {
     public sealed class CardFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Common.MasterData.Card>
     {

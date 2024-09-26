@@ -1,4 +1,6 @@
-﻿using MasterMemory;
+﻿#nullable enable
+
+using MasterMemory;
 using MessagePack;
 
 namespace Common.MasterData

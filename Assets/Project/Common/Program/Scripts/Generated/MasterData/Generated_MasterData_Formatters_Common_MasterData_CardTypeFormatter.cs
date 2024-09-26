@@ -11,19 +11,19 @@
 #pragma warning disable SA1403 // File may only contain a single namespace
 #pragma warning disable SA1649 // File name should match first type name
 
-namespace MessagePack.Formatters.Common.MasterData
+namespace Generated.MasterData.Formatters.Common.MasterData
 {
 
-    public sealed class HandFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Common.MasterData.CardHand>
+    public sealed class CardTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Common.MasterData.CardType>
     {
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Common.MasterData.CardHand value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Common.MasterData.CardType value, global::MessagePack.MessagePackSerializerOptions options)
         {
             writer.Write((global::System.Int32)value);
         }
 
-        public global::Common.MasterData.CardHand Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::Common.MasterData.CardType Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
-            return (global::Common.MasterData.CardHand)reader.ReadInt32();
+            return (global::Common.MasterData.CardType)reader.ReadInt32();
         }
     }
 }

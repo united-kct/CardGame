@@ -574,6 +574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardLoadingUI: {fileID: 1559758476}
+  _cardScanMessage: {fileID: 928765045}
+  _webCamera: {fileID: 1136338291}
 --- !u!114 &1136338291
 MonoBehaviour:
   m_ObjectHideFlags: 0

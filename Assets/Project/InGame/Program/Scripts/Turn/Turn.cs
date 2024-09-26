@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using R3.Triggers;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 namespace InGame
@@ -17,6 +18,7 @@ namespace InGame
         private int _turn = 1;
         private bool _isCardLoading;
         [SerializeField] private GameObject _cardLoadingUI = null!;
+        [SerializeField] private TextMeshProUGUI _cardScanMessage = null!;
         [SerializeField] private WebCamera _webCamera = null!;
 
         public void Initialize(Player player, Player opponentPlayer, int maxTurn)
@@ -53,7 +55,18 @@ namespace InGame
                 await UniTask.WaitUntil(() =>
                 {
                     var result = _player.SetCurrentCard(_webCamera.QrScanResult, new(CardHand.Paper, CardType.Fire, 400));
-                    return result.IsOk;
+                    if (!result.IsOk)
+                    {
+                        if (result.Error == SetCurrentCardError.IncorrectId)
+                        {
+                            _cardScanMessage.text = "このカードは使えないよ";
+                        }
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }, cancellationToken: ct);
 
                 _isCardLoading = false;

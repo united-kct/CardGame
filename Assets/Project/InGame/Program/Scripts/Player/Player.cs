@@ -15,11 +15,15 @@ namespace InGame
         }
 
         // TODO: 実際には読み込んで分かった id からデータを取得し、取得できなかった場合はエラーを返す。
-        public Result<Card, string> SetCurrentCard(string id, Card card)
+        public Result<Card, SetCurrentCardError> SetCurrentCard(string id, Card card)
         {
             if (id == string.Empty)
             {
-                return "id is empty";
+                return SetCurrentCardError.EmptyId;
+            }
+            else if (id == "2")
+            {
+                return SetCurrentCardError.IncorrectId;
             }
             else
             {
@@ -27,5 +31,11 @@ namespace InGame
                 return card;
             }
         }
+    }
+
+    public enum SetCurrentCardError
+    {
+        EmptyId,
+        IncorrectId
     }
 }

@@ -73,3 +73,4 @@ crashlytics-build.properties
 
 # SDF Fonts
 /Assets/Project/InGame/Design/Fonts/noto_sans_jp_medium_sdf.asset*
+\Assets\Project\BattleField\Fonts\ipag SDF.asset*

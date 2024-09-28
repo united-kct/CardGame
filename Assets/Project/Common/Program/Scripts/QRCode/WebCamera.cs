@@ -13,6 +13,7 @@ namespace Common.QRCode
         private WebCamTexture? _webCamTexture;
         private bool _isCameraVisible = false;
         public string QrScanResult { get; private set; } = string.Empty;
+        private bool _isScanDisable;
 
         private void Start()
         {
@@ -21,14 +22,14 @@ namespace Common.QRCode
 
         private void Update()
         {
-            if (_webCamTexture != null)
+            if (_webCamTexture != null && !_isScanDisable)
             {
                 QrScanResult = QRCodeReader.ReadQRCodeWebCameraTexture(_webCamTexture);
                 _qrScanResultUI.text = QrScanResult;
             }
         }
 
-        public void HandleClick()
+        public void HandleDebugCamera()
         {
             if (_isCameraVisible)
             {
@@ -42,6 +43,12 @@ namespace Common.QRCode
                 _qrScanResultUI.gameObject.SetActive(true);
                 _isCameraVisible = true;
             }
+        }
+
+        public void HandleDebugScanResult()
+        {
+            QrScanResult = "1";
+            _isScanDisable = true;
         }
 
         private void StartCamera()

@@ -55,18 +55,17 @@ namespace InGame
                 await UniTask.WaitUntil(() =>
                 {
                     var result = _player.SetCurrentCard(_webCamera.QrScanResult, new(CardHand.Paper, CardType.Fire, 400));
-                    if (!result.IsOk)
-                    {
-                        if (result.Error == SetCurrentCardError.IncorrectId)
+                    return result.Match(
+                        _ => true,
+                        err =>
                         {
-                            _cardScanMessage.text = "このカードは使えないよ";
+                            if (err == SetCurrentCardError.IncorrectId)
+                            {
+                                _cardScanMessage.text = "このカードは使えないよ";
+                            }
+                            return false;
                         }
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
+                    );
                 }, cancellationToken: ct);
 
                 _isCardLoading = false;

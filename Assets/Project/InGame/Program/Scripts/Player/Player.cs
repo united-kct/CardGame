@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using Common.MasterData;
 using Common.Result;
 
 namespace InGame
@@ -14,14 +15,13 @@ namespace InGame
             Hp = hp;
         }
 
-        // TODO: 実際には読み込んで分かった id からデータを取得し、取得できなかった場合はエラーを返す。
-        public Result<Card, SetCurrentCardError> SetCurrentCard(string id, Card card)
+        public Result<Card, SetCurrentCardError> SetCurrentCard(string id)
         {
             if (id == string.Empty)
             {
                 return SetCurrentCardError.EmptyId;
             }
-            else if (id == "2")
+            else if (!MasterDataDB.DB.CardTable.TryFindById(id, out var card))
             {
                 return SetCurrentCardError.IncorrectId;
             }

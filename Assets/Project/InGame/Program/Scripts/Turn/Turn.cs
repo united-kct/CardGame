@@ -54,7 +54,7 @@ namespace InGame
                 //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
                 await UniTask.WaitUntil(() =>
                 {
-                    var result = _player.SetCurrentCard(_webCamera.QrScanResult, new(CardHand.Paper, CardType.Fire, 400));
+                    var result = _player.SetCurrentCard(_webCamera.QrScanResult);
                     return result.Match(
                         _ => true,
                         err =>

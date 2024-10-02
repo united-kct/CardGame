@@ -2,13 +2,14 @@
 
 using Common.MasterData;
 using Common.Result;
+using System.Collections.Generic;
 
 namespace InGame
 {
     public class Player
     {
         public int Hp { get; set; }
-        public Card? CurrentCard { get; private set; }
+        public List<Card> Cards { get; private set; } = new();
 
         public Player(int hp)
         {
@@ -27,7 +28,7 @@ namespace InGame
             }
             else
             {
-                CurrentCard = card;
+                Cards.Add(card);
                 return card;
             }
         }

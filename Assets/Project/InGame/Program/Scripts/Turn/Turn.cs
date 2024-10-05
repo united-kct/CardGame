@@ -14,17 +14,18 @@ namespace InGame
     {
         private Player _player = null!;
         private Player _opponentPlayer = null!;
+        private QrCodeScannerModel _scannerModel = null!;
         private int _maxTurn;
         private int _turn = 1;
         private bool _isCardLoading;
         [SerializeField] private GameObject _cardLoadingUI = null!;
         [SerializeField] private TextMeshProUGUI _cardScanMessage = null!;
-        [SerializeField] private WebCamera _webCamera = null!;
 
-        public void Initialize(Player player, Player opponentPlayer, int maxTurn)
+        public void Initialize(Player player, Player opponentPlayer, QrCodeScannerModel scannerModel, int maxTurn)
         {
             _player = player;
             _opponentPlayer = opponentPlayer;
+            _scannerModel = scannerModel;
             _maxTurn = maxTurn;
 
             CancellationToken ct = this.GetCancellationTokenOnDestroy();
@@ -54,7 +55,7 @@ namespace InGame
                 //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
                 await UniTask.WaitUntil(() =>
                 {
-                    var result = _player.SetCurrentCard(_webCamera.QrScanResult);
+                    var result = _player.SetCurrentCard(_scannerModel.QrScanResult);
                     return result.Match(
                         _ => true,
                         err =>

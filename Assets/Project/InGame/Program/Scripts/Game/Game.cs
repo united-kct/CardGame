@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using Common.QRCode;
 using UnityEngine;
 
 namespace InGame
@@ -7,19 +8,22 @@ namespace InGame
     public class Game : MonoBehaviour
     {
         private GameSettings _gameSettings = null!;
+        private QrCodeScannerModel _scannerModel = null!;
+        [SerializeField] private QrCodeScanner _scanner = null!;
         [SerializeField] private Turn _turn = null!;
+        [SerializeField] private InGameDebugSheetController _debugController = null!;
 
-        // Start is called before the first frame update
         private void Start()
         {
             _gameSettings = new();
+            _scannerModel = new();
 
-            _turn.Initialize(_gameSettings.Player, _gameSettings.OpponentPlayer, _gameSettings.MaxTurn);
-        }
+            _scanner.Initialize(_scannerModel);
+            _turn.Initialize(_gameSettings.Player, _gameSettings.OpponentPlayer, _scannerModel, _gameSettings.MaxTurn);
 
-        // Update is called once per frame
-        private void Update()
-        {
+#if !EXCLUDE_UNITY_DEBUG_SHEET
+            _debugController.Initialize(_scannerModel);
+#endif
         }
     }
 }

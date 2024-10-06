@@ -3,6 +3,7 @@
 using Common.MasterData;
 using Common.Result;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace InGame.Player
 {
@@ -22,6 +23,10 @@ namespace InGame.Player
             {
                 return SetCurrentCardError.EmptyId;
             }
+            else if (Cards.Any(card => card.Id == id))
+            {
+                return SetCurrentCardError.DuplicateError;
+            }
             else if (!MasterDataDB.DB.CardTable.TryFindById(id, out var card))
             {
                 return SetCurrentCardError.IncorrectId;
@@ -37,6 +42,7 @@ namespace InGame.Player
     public enum SetCurrentCardError
     {
         EmptyId,
+        DuplicateError,
         IncorrectId
     }
 }

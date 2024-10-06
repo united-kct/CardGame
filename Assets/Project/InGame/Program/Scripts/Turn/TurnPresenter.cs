@@ -65,6 +65,11 @@ namespace InGame.Turn
                             {
                                 _cardScanMessage.text = "このカードは使えないよ";
                             }
+                            else if (err == SetCurrentCardError.DuplicateError)
+                            {
+                                _cardScanMessage.text = "同じカードは使えないよ";
+                            }
+
                             return false;
                         }
                     );

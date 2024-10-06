@@ -9,7 +9,6 @@ namespace InGame
         public int MaxHp { get; private set; }
         public int MaxTurn { get; private set; }
 
-        // TODO: 実際はマスターデータから取得する
         public GameSettings()
         {
             MaxHp = 3000;

@@ -25,6 +25,9 @@ public sealed class QrCodeScannerPage : DefaultDebugPageBase
     {
         _scannerScreen = scannerScreen;
         _model = model;
+
+        _scannerScreen.rectTransform.sizeDelta = new(_model.Width, _model.Height);
+        _scannerScreen.texture = _model.CameraTexture;
     }
 
     public override Task Initialize()
@@ -39,6 +42,10 @@ public sealed class QrCodeScannerPage : DefaultDebugPageBase
         _scanResultId = AddInputField(_scanResultModel);
 
         AddSwitch(false, "QrCodeScannerScreenを表示する", valueChanged: x => { _scannerScreen.gameObject.SetActive(x); });
+
+        AddLabel("Width", subText: _model.Width.ToString());
+
+        AddLabel("Height", subText: _model.Height.ToString());
 
         return Task.CompletedTask;
     }

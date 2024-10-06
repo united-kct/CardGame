@@ -3,8 +3,6 @@
 using Common.QRCode;
 using Cysharp.Threading.Tasks;
 using InGame.Player;
-using R3;
-using R3.Triggers;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -18,8 +16,6 @@ namespace InGame.Turn
         private ScannerModel _scannerModel = null!;
         private int _maxTurn;
         private int _turn = 1;
-        private bool _isCardLoading;
-        [SerializeField] private GameObject _cardLoadingUI = null!;
         [SerializeField] private TextMeshProUGUI _cardScanMessage = null!;
 
         public void Initialize(PlayerPresenter player, PlayerPresenter opponentPlayer, ScannerModel scannerModel, int maxTurn)
@@ -31,27 +27,13 @@ namespace InGame.Turn
 
             CancellationToken ct = this.GetCancellationTokenOnDestroy();
             HandleTurn(ct).Forget();
-
-            this.UpdateAsObservable().Subscribe(_ => UpdateUI()).AddTo(this);
-        }
-
-        private void UpdateUI()
-        {
-            if (_isCardLoading)
-            {
-                _cardLoadingUI.SetActive(true);
-            }
-            else
-            {
-                _cardLoadingUI.SetActive(false);
-            }
         }
 
         private async UniTaskVoid HandleTurn(CancellationToken ct)
         {
             while (_turn <= _maxTurn)
             {
-                _isCardLoading = true;
+                _cardScanMessage.text = "カードを読み込もう";
                 UnityEngine.Debug.Log($"turn: {_turn}");
                 //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
                 await UniTask.WaitUntil(() =>
@@ -75,7 +57,7 @@ namespace InGame.Turn
                     );
                 }, cancellationToken: ct);
 
-                _isCardLoading = false;
+                _cardScanMessage.text = string.Empty;
                 CompareCard();
                 _turn++;
                 await UniTask.DelayFrame(120, PlayerLoopTiming.FixedUpdate, ct);

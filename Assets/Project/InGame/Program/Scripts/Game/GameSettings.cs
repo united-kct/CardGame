@@ -1,11 +1,13 @@
 ﻿#nullable enable
 
+using InGame.Player;
+
 namespace InGame
 {
     public class GameSettings
     {
-        public Player.Player Player { get; private set; }
-        public Player.Player OpponentPlayer { get; private set; }
+        public PlayerPresenter Player { get; private set; }
+        public PlayerPresenter OpponentPlayer { get; private set; }
         public int MaxHp { get; private set; }
         public int MaxTurn { get; private set; }
 

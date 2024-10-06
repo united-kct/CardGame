@@ -2,6 +2,7 @@
 
 using Common.QRCode;
 using InGame.Debug;
+using InGame.Turn;
 using UnityEngine;
 
 namespace InGame
@@ -11,7 +12,7 @@ namespace InGame
         private GameSettings _gameSettings = null!;
         private ScannerModel _scannerModel = null!;
         [SerializeField] private Scanner _scanner = null!;
-        [SerializeField] private Turn.Turn _turn = null!;
+        [SerializeField] private TurnPresenter _turn = null!;
         [SerializeField] private InGameDebugSheetController _debugController = null!;
 
         private void Start()

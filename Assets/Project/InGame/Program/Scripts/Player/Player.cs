@@ -4,7 +4,7 @@ using Common.MasterData;
 using Common.Result;
 using System.Collections.Generic;
 
-namespace InGame
+namespace InGame.Player
 {
     public class Player
     {

@@ -4,8 +4,8 @@ namespace InGame
 {
     public class GameSettings
     {
-        public Player Player { get; private set; }
-        public Player OpponentPlayer { get; private set; }
+        public Player.Player Player { get; private set; }
+        public Player.Player OpponentPlayer { get; private set; }
         public int MaxHp { get; private set; }
         public int MaxTurn { get; private set; }
 

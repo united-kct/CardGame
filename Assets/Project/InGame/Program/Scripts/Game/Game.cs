@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Common.QRCode;
+using InGame.Debug;
 using UnityEngine;
 
 namespace InGame
@@ -8,9 +9,9 @@ namespace InGame
     public class Game : MonoBehaviour
     {
         private GameSettings _gameSettings = null!;
-        private QrCodeScannerModel _scannerModel = null!;
-        [SerializeField] private QrCodeScanner _scanner = null!;
-        [SerializeField] private Turn _turn = null!;
+        private ScannerModel _scannerModel = null!;
+        [SerializeField] private Scanner _scanner = null!;
+        [SerializeField] private Turn.Turn _turn = null!;
         [SerializeField] private InGameDebugSheetController _debugController = null!;
 
         private void Start()

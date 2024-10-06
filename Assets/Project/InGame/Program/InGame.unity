@@ -666,8 +666,8 @@ GameObject:
   - component: {fileID: 1136338288}
   - component: {fileID: 1136338287}
   - component: {fileID: 1136338289}
-  - component: {fileID: 1136338293}
   - component: {fileID: 1136338294}
+  - component: {fileID: 1136338295}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deeb470258599f4295ea835e538e413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scanner: {fileID: 1136338293}
+  _scanner: {fileID: 1136338295}
   _turn: {fileID: 1136338289}
   _debugController: {fileID: 1136338294}
 --- !u!4 &1136338288
@@ -719,18 +719,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardLoadingUI: {fileID: 1559758476}
   _cardScanMessage: {fileID: 928765045}
---- !u!114 &1136338293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1136338286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befab67c88ae8354d942ac3e18f00c0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1136338294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,6 +732,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _qrCodeScannerScreen: {fileID: 922502005}
+--- !u!114 &1136338295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136338286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: befab67c88ae8354d942ac3e18f00c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1437199186
 GameObject:
   m_ObjectHideFlags: 0

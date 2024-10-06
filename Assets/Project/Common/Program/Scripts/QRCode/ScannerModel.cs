@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Common.QRCode
 {
-    public class QrCodeScannerModel
+    public class ScannerModel
     {
         public bool IsScannerEnable { get; set; } = true;
         public string QrScanResult { get; set; } = string.Empty;
@@ -12,7 +12,7 @@ namespace Common.QRCode
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public QrCodeScannerModel()
+        public ScannerModel()
         {
             Width = 200;
             Height = 200;

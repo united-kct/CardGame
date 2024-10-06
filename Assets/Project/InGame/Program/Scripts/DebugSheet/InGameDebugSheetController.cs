@@ -6,18 +6,21 @@ using UnityDebugSheet.Runtime.Core.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class InGameDebugSheetController : MonoBehaviour
+namespace InGame.Debug
 {
-    [SerializeField] private RawImage _qrCodeScannerScreen = null!;
-    private QrCodeScannerModel _scannerModel = null!;
-
-    public void Initialize(QrCodeScannerModel scannerModel)
+    public sealed class InGameDebugSheetController : MonoBehaviour
     {
-        _scannerModel = scannerModel;
+        [SerializeField] private RawImage _qrCodeScannerScreen = null!;
+        private ScannerModel _scannerModel = null!;
 
-        var rootPage = DebugSheet.Instance.GetOrCreateInitialPage("InGame");
+        public void Initialize(ScannerModel scannerModel)
+        {
+            _scannerModel = scannerModel;
 
-        rootPage.AddPageLinkButton<QrCodeScannerPage>("QrCodeScanner", onLoad: x => x.page.Setup(_qrCodeScannerScreen, _scannerModel));
+            var rootPage = DebugSheet.Instance.GetOrCreateInitialPage("InGame");
+
+            rootPage.AddPageLinkButton<ScannerPage>("QrCodeScanner", onLoad: x => x.page.Setup(_qrCodeScannerScreen, _scannerModel));
+        }
     }
 }
 

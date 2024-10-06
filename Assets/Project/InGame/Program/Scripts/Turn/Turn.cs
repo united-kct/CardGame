@@ -2,26 +2,27 @@
 
 using Common.QRCode;
 using Cysharp.Threading.Tasks;
+using InGame.Player;
 using R3;
 using R3.Triggers;
 using System.Threading;
 using TMPro;
 using UnityEngine;
 
-namespace InGame
+namespace InGame.Turn
 {
     public class Turn : MonoBehaviour
     {
-        private Player _player = null!;
-        private Player _opponentPlayer = null!;
-        private QrCodeScannerModel _scannerModel = null!;
+        private Player.Player _player = null!;
+        private Player.Player _opponentPlayer = null!;
+        private ScannerModel _scannerModel = null!;
         private int _maxTurn;
         private int _turn = 1;
         private bool _isCardLoading;
         [SerializeField] private GameObject _cardLoadingUI = null!;
         [SerializeField] private TextMeshProUGUI _cardScanMessage = null!;
 
-        public void Initialize(Player player, Player opponentPlayer, QrCodeScannerModel scannerModel, int maxTurn)
+        public void Initialize(Player.Player player, Player.Player opponentPlayer, ScannerModel scannerModel, int maxTurn)
         {
             _player = player;
             _opponentPlayer = opponentPlayer;
@@ -51,7 +52,7 @@ namespace InGame
             while (_turn <= _maxTurn)
             {
                 _isCardLoading = true;
-                Debug.Log($"turn: {_turn}");
+                UnityEngine.Debug.Log($"turn: {_turn}");
                 //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
                 await UniTask.WaitUntil(() =>
                 {
@@ -79,7 +80,7 @@ namespace InGame
         // hand, type から勝敗と相性を判定し、hp を減らす
         private void CompareCard()
         {
-            Debug.Log("カードを比較する");
+            UnityEngine.Debug.Log("カードを比較する");
         }
     }
 }

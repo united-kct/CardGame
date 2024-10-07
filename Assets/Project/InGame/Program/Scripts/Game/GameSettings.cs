@@ -1,15 +1,16 @@
 ﻿#nullable enable
 
+using InGame.Player;
+
 namespace InGame
 {
     public class GameSettings
     {
-        public Player Player { get; private set; }
-        public Player OpponentPlayer { get; private set; }
+        public PlayerPresenter Player { get; private set; }
+        public PlayerPresenter OpponentPlayer { get; private set; }
         public int MaxHp { get; private set; }
         public int MaxTurn { get; private set; }
 
-        // TODO: 実際はマスターデータから取得する
         public GameSettings()
         {
             MaxHp = 3000;

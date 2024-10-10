@@ -10,7 +10,7 @@ public class DamageTextEffect : MonoBehaviour
     
     void Start()
     {
-        var colorCode = /*"#915B00"*/"#636363";
+        var colorCode = "#915B00"/*"#636363"*/;
         Color color;
         ColorUtility.TryParseHtmlString(colorCode, out color);
         _damageText = GetComponent<TextMeshProUGUI>();
@@ -22,4 +22,6 @@ public class DamageTextEffect : MonoBehaviour
     {
         
     }
+
+    
 }

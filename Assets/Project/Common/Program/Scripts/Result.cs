@@ -1,39 +1,29 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 
 namespace Common.Result
 {
     public readonly struct Result<T, E>
     {
-        private readonly bool _success;
-        public readonly T Value;
-        public readonly E Error;
+        private readonly T? _value;
+        private readonly E? _error;
+        private readonly bool _isOk;
 
-        private Result(T v, E e, bool success)
+        private Result(T? v, E? e, bool isOk)
         {
-            Value = v;
-            Error = e;
-            _success = success;
+            _value = v;
+            _error = e;
+            _isOk = isOk;
         }
 
-        public bool IsOk => _success;
+        public static implicit operator Result<T, E>(T v) => new(v, default, true);
 
-        public static Result<T, E> Ok(T v)
-        {
-            return new(v, default(E), true);
-        }
-
-        public static Result<T, E> Err(E e)
-        {
-            return new(default(T), e, false);
-        }
-
-        public static implicit operator Result<T, E>(T v) => new(v, default(E), true);
-
-        public static implicit operator Result<T, E>(E e) => new(default(T), e, false);
+        public static implicit operator Result<T, E>(E e) => new(default, e, false);
 
         public R Match<R>(
                 Func<T, R> success,
                 Func<E, R> failure) =>
-            _success ? success(Value) : failure(Error);
+            _isOk ? success(_value!) : failure(_error!);
     }
 }

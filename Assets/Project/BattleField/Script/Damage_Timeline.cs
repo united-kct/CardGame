@@ -5,9 +5,8 @@ using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using System;
 
-public class Janken_Timeline : MonoBehaviour
+public class Damage_Timeline : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private PlayableDirector director;
     [SerializeField] private GameObject _gameobject;
     private bool _isdone;

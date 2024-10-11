@@ -10,11 +10,7 @@ public class DamageTextEffect : MonoBehaviour
     
     void Start()
     {
-        var colorCode = "#915B00"/*"#636363"*/;
-        Color color;
-        ColorUtility.TryParseHtmlString(colorCode, out color);
-        _damageText = GetComponent<TextMeshProUGUI>();
-        _damageText.outlineColor = color;
+        
     }
 
     // Update is called once per frame
@@ -23,5 +19,12 @@ public class DamageTextEffect : MonoBehaviour
         
     }
 
-    
+    public void Damaged(int x) {
+        var colorCode = "#915B00"/*"#636363"*/;
+        Color color;
+        ColorUtility.TryParseHtmlString(colorCode, out color);
+        _damageText = GetComponent<TextMeshProUGUI>();
+        _damageText.outlineColor = color;
+        _damageText.text = x.ToString() + "ダメージ";
+    }
 }

@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 using System;
 
 public class Round_Timeline : MonoBehaviour
 {
     [SerializeField] private PlayableDirector director;
-
+    [SerializeField] private GameObject _gameobject;
+    private bool _isdone;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        TimelineAsset timelineAsset = director.playableAsset as TimelineAsset;
+        director.stopped += DirectorStopped;
     }
 
     // Update is called once per frame
@@ -23,10 +24,18 @@ public class Round_Timeline : MonoBehaviour
     }
 
     public bool IsDone() {
-        return Math.Round(director.time,2,MidpointRounding.AwayFromZero) >= Math.Round(director.duration,2,MidpointRounding.AwayFromZero);
+        return _isdone;
     }
 
     public void TimelinePlay() {
+        _isdone = false;
         director.Play();
+    }
+
+    void DirectorStopped(PlayableDirector _director) {
+        if (_director == director) {
+            _isdone = true;
+            _gameobject.SetActive(false);
+        }
     }
 }

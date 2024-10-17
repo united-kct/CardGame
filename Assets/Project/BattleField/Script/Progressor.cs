@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using BattleField.Script.TimelineManagge;
 
 namespace BattleField.Script.Progress {
     public class Progressor : MonoBehaviour
     {
         // Start is called before the first frame update
-        [SerializeField] Round_Timeline _round_Timeline;
-        [SerializeField] Janken_Timeline _janken_Timeline;
-        [SerializeField] DamageTextEffect _damageTextEffect;
+        [SerializeField] TimelineManagger _round_Timeline;
+        [SerializeField] TimelineManagger _janken_Timeline;
+        [SerializeField] TextEffect _damageTextEffect;
         [SerializeField] HpBarModel _hpBarModel;
-        [SerializeField] Damage_Timeline _damage_Timeline;
+        [SerializeField] TimelineManagger _damage_Timeline;
         [SerializeField] int Damage;
+        private char _playerHand;
+        private char _enemyHand;
         private int _turn = 1;
         private int _maxTurn;
 

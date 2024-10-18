@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Common.MasterData;
 
 namespace BattleField.Script.Janken {
     public class JankenSelector : MonoBehaviour
@@ -20,18 +21,15 @@ namespace BattleField.Script.Janken {
         private void Pa_() {
             _jankenSelector.sprite = _pa_;
         }
-        public enum Hands {
-            guu,choki,paa
-        }
-        public void SetOptions(Hands option) {
+        public void SetOptions(CardHand option) {
             switch (option) {
-                case Hands.guu:
+                case CardHand.Rock:
                     Gu_();
                     break;
-                case Hands.choki:
+                case CardHand.Scissors:
                     Choki();
                     break;
-                case Hands.paa:
+                case CardHand.Paper:
                     Pa_();
                     break;
             }

@@ -41,10 +41,17 @@ public class Round : MonoBehaviour
                 _round.text = "";
                 break;
         }
-        if (_summonCount >= 5) _summonCount = 0;
         _summonCount++;
+        if (_summonCount > 5) _summonCount = 0;
+
     }
 
+    public void RoundCount(int turn) {
+        _round.text = "ROUND" + turn;
+    }
+
+
+    
     
 
 }

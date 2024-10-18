@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using BattleField.Script.Progress;
 using Common.QRCode;
 using InGame.Debug;
 using InGame.Turn;
@@ -13,6 +14,7 @@ namespace InGame
         private ScannerModel _scannerModel = null!;
         [SerializeField] private Scanner _scanner = null!;
         [SerializeField] private TurnPresenter _turn = null!;
+        [SerializeField] private Progressor _progressor = null!;
         [SerializeField] private InGameDebugSheetController _debugController = null!;
 
         private void Start()
@@ -22,6 +24,7 @@ namespace InGame
 
             _scanner.Initialize(_scannerModel);
             _turn.Initialize(_gameSettings.Player, _gameSettings.OpponentPlayer, _scannerModel, _gameSettings.MaxTurn);
+            _progressor.Initialize(_gameSettings);
 
 #if !EXCLUDE_UNITY_DEBUG_SHEET
             _debugController.Initialize(_scannerModel);

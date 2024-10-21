@@ -16,8 +16,11 @@ namespace BattleField.Script.Battle.Draw.Judge {
         [SerializeField] HpBarModel _playerhp;
         [SerializeField] HpBarModel _enemyhp;
         [SerializeField] TimelineManagger _damageTimeline;
+        [SerializeField] TimelineManagger _draw;
         [SerializeField] TextEffect _damageTextEffect;
         public async UniTask DrawProcess(Card playerCard, Card enemyCard, CancellationToken ct) {
+            _draw.TimelinePlay();
+            await UniTask.WaitUntil(() => _draw.IsDone());
             DamageValue _damageValue = new DamageValue();
             int enemyReceiveDamage = _damageValue.CalcDamageValue(playerCard.Power, playerCard.Type, enemyCard.Type);
             _enemyhp.Health -= enemyReceiveDamage;

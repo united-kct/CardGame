@@ -24,6 +24,7 @@ namespace InGame.Turn
             _opponentPlayer = opponentPlayer;
             _scannerModel = scannerModel;
             _maxTurn = maxTurn;
+            _cardScanMessage.enabled = false;
 
             // CancellationToken ct = this.GetCancellationTokenOnDestroy();
             // HandleTurn(ct).Forget();
@@ -31,6 +32,7 @@ namespace InGame.Turn
 
         public async UniTask HandleTurn(CancellationToken ct)
         {
+            _cardScanMessage.enabled = true;
             _cardScanMessage.text = "カードを読み込もう";
             UnityEngine.Debug.Log($"turn: {_turn}");
             //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
@@ -51,6 +53,7 @@ namespace InGame.Turn
             }, cancellationToken: ct);
 
             _cardScanMessage.text = string.Empty;
+            _cardScanMessage.enabled = false;
             CompareCard();
             UnityEngine.Debug.Log("カード");
             // _turn++;

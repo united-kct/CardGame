@@ -15,8 +15,11 @@ namespace BattleField.Script.Battle.Lose.Judge {
         [SerializeField] HpBarModel _playerhp;
         [SerializeField] HpBarModel _enemyhp;
         [SerializeField] TimelineManagger _damageTimeline;
+        [SerializeField] TimelineManagger _lose;
         [SerializeField] TextEffect _damageTextEffect;
         public async UniTask LoseProcess(Card playerCard, Card enemyCard, CancellationToken ct) {
+            _lose.TimelinePlay();
+            await UniTask.WaitUntil(() => _lose.IsDone());
             DamageValue _damageValue = new DamageValue();
             int receiveDamage = _damageValue.CalcDamageValue(enemyCard.Power, enemyCard.Type, playerCard.Type);
             _playerhp.Health -= receiveDamage;

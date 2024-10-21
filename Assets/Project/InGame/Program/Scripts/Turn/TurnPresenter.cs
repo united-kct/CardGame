@@ -24,44 +24,39 @@ namespace InGame.Turn
             _opponentPlayer = opponentPlayer;
             _scannerModel = scannerModel;
             _maxTurn = maxTurn;
+            _cardScanMessage.enabled = false;
 
-            CancellationToken ct = this.GetCancellationTokenOnDestroy();
-            HandleTurn(ct).Forget();
+            // CancellationToken ct = this.GetCancellationTokenOnDestroy();
+            // HandleTurn(ct).Forget();
         }
 
-        private async UniTaskVoid HandleTurn(CancellationToken ct)
+        public async UniTask HandleTurn(CancellationToken ct)
         {
-            while (_turn <= _maxTurn)
-            {
-                _cardScanMessage.text = "カードを読み込もう";
-                UnityEngine.Debug.Log($"turn: {_turn}");
-                //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
-                await UniTask.WaitUntil(() =>
-                {
-                    var result = _player.SetCurrentCard(_scannerModel.QrScanResult);
-                    return result.Match(
-                        _ => true,
-                        err =>
-                        {
-                            if (err == SetCurrentCardError.IncorrectId)
-                            {
-                                _cardScanMessage.text = "このカードは使えないよ";
-                            }
-                            else if (err == SetCurrentCardError.DuplicateError)
-                            {
-                                _cardScanMessage.text = "同じカードは使えないよ";
-                            }
-
-                            return false;
+            _cardScanMessage.enabled = true;
+            _cardScanMessage.text = "カードを読み込もう";
+            UnityEngine.Debug.Log($"turn: {_turn}");
+            //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
+            await UniTask.WaitUntil(() => {
+                var result = _player.SetCurrentCard(_scannerModel.QrScanResult);
+                return result.Match(
+                    _ => true,
+                    err => {
+                        if (err == SetCurrentCardError.IncorrectId) {
+                            _cardScanMessage.text = "このカードは使えないよ";
                         }
-                    );
-                }, cancellationToken: ct);
+                        else if (err == SetCurrentCardError.DuplicateError) {
+                            _cardScanMessage.text = "同じカードは使えないよ";
+                        }
+                        return false;
+                    }
+                );
+            }, cancellationToken: ct);
 
-                _cardScanMessage.text = string.Empty;
-                CompareCard();
-                _turn++;
-                await UniTask.DelayFrame(120, PlayerLoopTiming.FixedUpdate, ct);
-            }
+            _cardScanMessage.text = string.Empty;
+            _cardScanMessage.enabled = false;
+            CompareCard();
+            UnityEngine.Debug.Log("カード");
+            // _turn++;
         }
 
         // hand, type から勝敗と相性を判定し、hp を減らす

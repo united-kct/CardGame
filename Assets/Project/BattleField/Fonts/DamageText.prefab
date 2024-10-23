@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: "1000\u30C0\u30E1\u30FC\u30B8\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ff87e507d46301149908bbca11d842f2, type: 2}
-  m_sharedMaterial: {fileID: -1342945195872536380, guid: ff87e507d46301149908bbca11d842f2, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 94a8f71d2b1859747b6d3a4378aae547, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -1,11 +1,11 @@
 using System;
-using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
-using TMPro;
 
-[Serializable]
-public class TextBehaviour : PlayableBehaviour
+namespace Project.BattleField.Script.TimelineTracks.Text
 {
-    public string text;
+    [Serializable]
+    public class TextBehaviour : PlayableBehaviour
+    {
+        public string text;
+    }
 }

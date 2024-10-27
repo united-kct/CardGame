@@ -2,47 +2,55 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class TextMixerBehaviour : PlayableBehaviour
+namespace Project.BattleField.Script.TimelineTracks.Text
 {
-    private string m_AssignedText;
-
-    private TextMeshProUGUI m_TrackBinding;
-
-    public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+    public class TextMixerBehaviour : PlayableBehaviour
     {
-        m_TrackBinding = playerData as TextMeshProUGUI;
+        private string m_AssignedText;
 
-        if (m_TrackBinding == null)
-            return;
+        private TextMeshProUGUI m_TrackBinding;
 
-        int inputCount = playable.GetInputCount();
-
-        float totalWeight = 0f;
-        float greatestWeight = 0f;
-        int currentInputs = 0;
-
-        for (int i = 0; i < inputCount; i++)
+        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
-            float inputWeight = playable.GetInputWeight(i);
-            ScriptPlayable<TextBehaviour> inputPlayable = (ScriptPlayable<TextBehaviour>)playable.GetInput(i);
-            TextBehaviour input = inputPlayable.GetBehaviour();
+            m_TrackBinding = playerData as TextMeshProUGUI;
 
-            totalWeight += inputWeight;
+            if (m_TrackBinding == null)
+                return;
 
-            if (inputWeight > greatestWeight)
+            int inputCount = playable.GetInputCount();
+
+            float totalWeight = 0f;
+            float greatestWeight = 0f;
+            int currentInputs = 0;
+
+            for (int i = 0; i < inputCount; i++)
             {
-                m_AssignedText = input.text;
-                m_TrackBinding.text = m_AssignedText;
-                greatestWeight = inputWeight;
+                float inputWeight = playable.GetInputWeight(i);
+                ScriptPlayable<TextBehaviour> inputPlayable = (ScriptPlayable<TextBehaviour>)playable.GetInput(i);
+                TextBehaviour input = inputPlayable.GetBehaviour();
+
+                totalWeight += inputWeight;
+
+                if (inputWeight > greatestWeight)
+                {
+                    m_AssignedText = input.text;
+                    m_TrackBinding.text = m_AssignedText;
+                    greatestWeight = inputWeight;
+                }
+
+                if (!Mathf.Approximately(inputWeight, 0f))
+                {
+                    currentInputs++;
+                }
             }
 
-            if (!Mathf.Approximately(inputWeight, 0f))
+            if (currentInputs != 1 && 1f - totalWeight > greatestWeight)
             {
-                currentInputs++;
+                m_TrackBinding.text = "";
             }
         }
 
-        if (currentInputs != 1 && 1f - totalWeight > greatestWeight)
+        public override void OnGraphStop(Playable playable)
         {
             m_TrackBinding.text = "";
         }

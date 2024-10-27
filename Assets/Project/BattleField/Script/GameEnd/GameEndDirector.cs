@@ -1,43 +1,43 @@
 ﻿#nullable enable
 
-using Cysharp.Threading.Tasks;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace BattleField.GameEnd
+namespace Project.BattleField.Script.GameEnd
 {
     public class GameEndDirector : MonoBehaviour
     {
-        [SerializeField] private PlayableDirector _endDirector = null!;
-        [SerializeField] private PlayableDirector _winDirector = null!;
-        [SerializeField] private PlayableDirector _drawDirector = null!;
-        [SerializeField] private PlayableDirector _loseDirector = null!;
-        [SerializeField] private PlayableDirector _announceDirector = null!;
+        [SerializeField] private PlayableDirector endDirector = null!;
+        [SerializeField] private PlayableDirector winDirector = null!;
+        [SerializeField] private PlayableDirector drawDirector = null!;
+        [SerializeField] private PlayableDirector loseDirector = null!;
+        [SerializeField] private PlayableDirector announceDirector = null!;
 
         public async UniTask PlayDirector(GameResult gameResult, CancellationToken ct)
         {
-            _endDirector.Play();
-            await UniTask.WaitUntil(() => _endDirector.time >= _endDirector.duration, cancellationToken: ct);
+            endDirector.Play();
+            await UniTask.WaitUntil(() => endDirector.state == PlayState.Paused, cancellationToken: ct);
 
             if (gameResult == GameResult.Win)
             {
-                _winDirector.Play();
-                await UniTask.WaitUntil(() => _winDirector.time >= _winDirector.duration, cancellationToken: ct);
+                winDirector.Play();
+                await UniTask.WaitUntil(() => winDirector.state == PlayState.Paused, cancellationToken: ct);
             }
             else if (gameResult == GameResult.Draw)
             {
-                _drawDirector.Play();
-                await UniTask.WaitUntil(() => _drawDirector.time >= _drawDirector.duration, cancellationToken: ct);
+                drawDirector.Play();
+                await UniTask.WaitUntil(() => drawDirector.state == PlayState.Paused, cancellationToken: ct);
             }
             else
             {
-                _loseDirector.Play();
-                await UniTask.WaitUntil(() => _loseDirector.time >= _loseDirector.duration, cancellationToken: ct);
+                loseDirector.Play();
+                await UniTask.WaitUntil(() => loseDirector.state == PlayState.Paused, cancellationToken: ct);
             }
 
-            _announceDirector.Play();
-            await UniTask.WaitUntil(() => _announceDirector.time >= _announceDirector.duration, cancellationToken: ct);
+            announceDirector.Play();
+            await UniTask.WaitUntil(() => announceDirector.state == PlayState.Paused, cancellationToken: ct);
         }
     }
 

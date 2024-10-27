@@ -1123,7 +1123,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 5079a56d58a350f4f88c2938243d5f8b, type: 2}
   m_InitialState: 0
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -1267,7 +1267,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 024d54173dcc19448a6944c03cb54f48, type: 2}
   m_InitialState: 0
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -1452,7 +1452,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 7aec2dbcab3cc3e428e5b3752e2210f3, type: 2}
   m_InitialState: 0
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -2476,7 +2476,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 6f9c690020bcfbe40b9046a354d46288, type: 2}
   m_InitialState: 0
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -3311,11 +3311,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 304fd9a4f4e0fef4d887a28049a19ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _endDirector: {fileID: 1464595769}
-  _winDirector: {fileID: 542153394}
-  _drawDirector: {fileID: 496735095}
-  _loseDirector: {fileID: 766459001}
-  _announceDirector: {fileID: 2050557903}
+  endDirector: {fileID: 1464595769}
+  winDirector: {fileID: 542153394}
+  drawDirector: {fileID: 496735095}
+  loseDirector: {fileID: 766459001}
+  announceDirector: {fileID: 2050557903}
 --- !u!1 &2042211443
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,7 +3391,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: dd04e88794583144e843ce971501449b, type: 2}
   m_InitialState: 0
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:

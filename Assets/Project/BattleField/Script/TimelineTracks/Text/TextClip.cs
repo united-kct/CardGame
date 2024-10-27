@@ -3,19 +3,22 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-[Serializable]
-public class TextClip : PlayableAsset, ITimelineClipAsset
+namespace Project.BattleField.Script.TimelineTracks.Text
 {
-    public TextBehaviour template = new TextBehaviour ();
-
-    public ClipCaps clipCaps
+    [Serializable]
+    public class TextClip : PlayableAsset, ITimelineClipAsset
     {
-        get { return ClipCaps.Blending; }
-    }
+        public TextBehaviour template = new TextBehaviour ();
 
-    public override Playable CreatePlayable (PlayableGraph graph, GameObject owner)
-    {
-        var playable = ScriptPlayable<TextBehaviour>.Create (graph, template);
-        return playable;
+        public ClipCaps clipCaps
+        {
+            get { return ClipCaps.Blending; }
+        }
+
+        public override Playable CreatePlayable (PlayableGraph graph, GameObject owner)
+        {
+            var playable = ScriptPlayable<TextBehaviour>.Create (graph, template);
+            return playable;
+        }
     }
 }

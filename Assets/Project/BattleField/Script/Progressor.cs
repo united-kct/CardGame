@@ -1,5 +1,4 @@
-﻿using BattleField.GameEnd;
-using BattleField.Script.Battle.Draw.Judge;
+﻿using BattleField.Script.Battle.Draw.Judge;
 using BattleField.Script.Battle.Lose.Judge;
 using BattleField.Script.Battle.Win.Judge;
 using BattleField.Script.HpBar.Model;
@@ -13,6 +12,7 @@ using InGame.Player;
 using InGame.Turn;
 using System.Linq;
 using System.Threading;
+using Project.BattleField.Script.GameEnd;
 using UnityEngine;
 
 namespace BattleField.Script.Progress

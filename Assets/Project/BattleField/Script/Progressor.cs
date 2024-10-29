@@ -1,38 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Cysharp.Threading.Tasks;
-using System.Threading;
-using System.Linq;
-
-using Common.Result;
-using InGame.Turn;
-using InGame.Player;
-using BattleField.Script.TimelineManagge;
+﻿using BattleField.Script.Battle.Draw.Judge;
+using BattleField.Script.Battle.Lose.Judge;
+using BattleField.Script.Battle.Win.Judge;
+using BattleField.Script.HpBar.Model;
 using BattleField.Script.Janken;
 using BattleField.Script.Judge;
-using BattleField.Script.Battle.Win.Judge;
-using BattleField.Script.Battle.Draw.Judge;
-using BattleField.Script.Battle.Lose.Judge;
+using BattleField.Script.TimelineManagge;
 using Common.MasterData;
+using Cysharp.Threading.Tasks;
 using InGame;
+using InGame.Player;
+using InGame.Turn;
+using System.Linq;
+using System.Threading;
+using Project.BattleField.Script.GameEnd;
+using UnityEngine;
 
-namespace BattleField.Script.Progress {
+namespace BattleField.Script.Progress
+{
     public class Progressor : MonoBehaviour
     {
         // Start is called before the first frame update
-        [SerializeField] TurnPresenter _turnPresenter;
-        [SerializeField] TimelineManagger _round_Timeline;
-        [SerializeField] TimelineManagger _janken_Timeline;
-        [SerializeField] JankenSelector _playerJankenSelector;
-        [SerializeField] JankenSelector _enemyJankenSelector;
-        [SerializeField] TextEffect _damageTextEffect;
-        [SerializeField] Round _round;
-        [SerializeField] TimelineManagger _damage_Timeline;
-        [SerializeField] Win _winAction;
-        [SerializeField] Draw _drawAction;
-        [SerializeField] Lose _loseAction;
-        [SerializeField] int turn;
+        [SerializeField] private TurnPresenter _turnPresenter;
+
+        [SerializeField] private TimelineManagger _round_Timeline;
+        [SerializeField] private TimelineManagger _janken_Timeline;
+        [SerializeField] private JankenSelector _playerJankenSelector;
+        [SerializeField] private JankenSelector _enemyJankenSelector;
+        [SerializeField] private TextEffect _damageTextEffect;
+        [SerializeField] private Round _round;
+        [SerializeField] private TimelineManagger _damage_Timeline;
+        [SerializeField] private Win _winAction;
+        [SerializeField] private Draw _drawAction;
+        [SerializeField] private Lose _loseAction;
+        [SerializeField] private GameEndDirector _gameEndDirector;
+        [SerializeField] private HpBarModel _playerhp;
+        [SerializeField] private HpBarModel _enemyhp;
+
+        //[SerializeField] private GameEndText _gameEndText;
+        [SerializeField] private int turn;
+
         private Card _playerCard;
         private Card _enemyCard;
         private int _turn = 1;
@@ -41,32 +47,31 @@ namespace BattleField.Script.Progress {
         private GameSettings _gameSettings;
         private ViewJudge _viewJudge;
 
-        public void Initialize(GameSettings gameSettings){
+        public void Initialize(GameSettings gameSettings)
+        {
             _viewJudge = new ViewJudge();
             _gameSettings = gameSettings;
             _playerPresenter = gameSettings.Player;
             _maxTurn = _gameSettings.MaxTurn;
-            Debug.Log("aaa");
             CancellationToken ct = this.GetCancellationTokenOnDestroy();
             Role(ct).Forget();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            
         }
 
-        private async UniTaskVoid Role(CancellationToken ct) {
-            while(_turn <= _maxTurn) {
+        private async UniTaskVoid Role(CancellationToken ct)
+        {
+            while (_turn <= _maxTurn)
+            {
                 _round.RoundCount(_turn);
                 _round_Timeline.TimelinePlay();
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());
-                Debug.Log("Round");
                 await UniTask.WhenAll(_turnPresenter.HandleTurn(ct));
-                Debug.Log("関門");
                 _playerCard = _playerPresenter.Cards.Last();
-                _enemyCard = new Card("1",1000,CardHand.Rock,CardType.Fire,"1");
+                _enemyCard = new Card("1", 1000, CardHand.Rock, CardType.Fire, "1");
                 JudgementType judge = _viewJudge.JankenJudge(_playerCard.Hand, _enemyCard.Hand);
                 _janken_Timeline.TimelinePlay();
                 _playerJankenSelector.SetOptions(_playerCard.Hand);
@@ -77,7 +82,11 @@ namespace BattleField.Script.Progress {
                 else await UniTask.WhenAll(_loseAction.LoseProcess(_playerCard, _enemyCard, ct));
                 _turn++;
             }
+
+            GameResult gameResult =
+                _playerhp.Health == _enemyhp.Health ? GameResult.Draw :
+                _playerhp.Health > _enemyhp.Health ? GameResult.Win : GameResult.Lose;
+            await _gameEndDirector.PlayDirector(gameResult, ct);
         }
     }
 }
-

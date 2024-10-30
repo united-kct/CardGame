@@ -1979,7 +1979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51f242032c3cbb45a1c0b63e00cf883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _qrCodeScannerScreen: {fileID: 1919789898}
+  qrCodeScannerScreen: {fileID: 1919789898}
 --- !u!114 &978527150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1992,10 +1992,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deeb470258599f4295ea835e538e413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scanner: {fileID: 978527148}
-  _turn: {fileID: 978527147}
-  _progressor: {fileID: 467719850}
-  _debugController: {fileID: 978527149}
+  scanner: {fileID: 978527148}
+  turn: {fileID: 978527147}
+  progressor: {fileID: 467719850}
+  debugController: {fileID: 978527149}
 --- !u!4 &978527151
 Transform:
   m_ObjectHideFlags: 0
@@ -2851,7 +2851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6564643837970611225, guid: ca5e6d279e01e413f8bbf07d75aebe7f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 706.5
+      value: 707.35846
       objectReference: {fileID: 0}
     - target: {fileID: 6564643837970611225, guid: ca5e6d279e01e413f8bbf07d75aebe7f, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2859,7 +2859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6564643837970611225, guid: ca5e6d279e01e413f8bbf07d75aebe7f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 706.5
+      value: 707.35846
       objectReference: {fileID: 0}
     - target: {fileID: 6564643838517370660, guid: ca5e6d279e01e413f8bbf07d75aebe7f, type: 3}
       propertyPath: m_MatchWidthOrHeight

@@ -16,7 +16,7 @@ namespace Project.Title.Program.Scripts.Debug
         {
             var rootPage = DebugSheet.Instance.GetOrCreateInitialPage("DebugMenu");
             
-            rootPage.AddPageLinkButton<ScannerPage>("QrCodeScanner", onLoad: x => x.page.Setup(qrCodeScannerScreen, scannerModel));
+            rootPage.AddPageLinkButton<ScannerPage>("Title:QrCodeScanner", onLoad: x => x.page.Setup(qrCodeScannerScreen, scannerModel));
         }
     }
 }

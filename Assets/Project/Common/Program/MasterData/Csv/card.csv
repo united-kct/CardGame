@@ -1,2 +1,4 @@
 Id,Power,Hand,Type,ImageId
 1,1000,Rock,Grass,1
+2,1000,Scissors,Fire,1
+3,1000,Paper,Water,1

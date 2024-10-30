@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scanner: {fileID: 1904202483}
-  debugController: {fileID: 1904202484}
+  debugPage: {fileID: 1904202484}
   title: {fileID: 1904202486}
 --- !u!114 &1904202486
 MonoBehaviour:

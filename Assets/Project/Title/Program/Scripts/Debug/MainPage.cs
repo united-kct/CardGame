@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 namespace Project.Title.Program.Scripts.Debug
 {
-    public class TitleDebugSheetController : MonoBehaviour
+    public class MainPage : MonoBehaviour
     {
         [SerializeField] private RawImage qrCodeScannerScreen = null!;
 
         public void Initialize(ScannerModel scannerModel)
         {
-            var rootPage = DebugSheet.Instance.GetOrCreateInitialPage("Title");
+            var rootPage = DebugSheet.Instance.GetOrCreateInitialPage("DebugMenu");
             
             rootPage.AddPageLinkButton<ScannerPage>("QrCodeScanner", onLoad: x => x.page.Setup(qrCodeScannerScreen, scannerModel));
         }

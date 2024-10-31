@@ -465,7 +465,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Win
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ff87e507d46301149908bbca11d842f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6343433094b114b0482aaf36b8171590, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 664705a2edf4a53428a7fcfdb1ac1366, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -831,8 +831,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ff87e507d46301149908bbca11d842f2, type: 2}
-  m_sharedMaterial: {fileID: -1342945195872536380, guid: ff87e507d46301149908bbca11d842f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6343433094b114b0482aaf36b8171590, type: 2}
+  m_sharedMaterial: {fileID: -1342945195872536380, guid: 6343433094b114b0482aaf36b8171590, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -921,7 +921,6 @@ GameObject:
   - component: {fileID: 467719853}
   - component: {fileID: 467719852}
   - component: {fileID: 467719851}
-  - component: {fileID: 467719854}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1241,7 +1240,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -2070,7 +2069,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Draw
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ff87e507d46301149908bbca11d842f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6343433094b114b0482aaf36b8171590, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 8f1b36867b7d33b46a54439589cd0940, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2253,7 +2252,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30AB\u30FC\u30C9\u3092\u8AAD\u307F\u8FBC\u3082\u3046"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ff87e507d46301149908bbca11d842f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6343433094b114b0482aaf36b8171590, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 5c6b1c9e6dc903f4cb977c67a052636a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2406,7 +2405,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lose
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ff87e507d46301149908bbca11d842f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6343433094b114b0482aaf36b8171590, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: aafddd8c1fbd7d344b885bda99794661, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3165,7 +3164,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: ROUND1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ff87e507d46301149908bbca11d842f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6343433094b114b0482aaf36b8171590, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e33ecbc794edafd41a55acf708efeed9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3713,7 +3712,7 @@ PrefabInstance:
     - target: {fileID: 4913462045113395702, guid: 35aa697c9c97ebf499f40248621d27b9, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: ff87e507d46301149908bbca11d842f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 6343433094b114b0482aaf36b8171590, type: 2}
     - target: {fileID: 4913462045113395702, guid: 35aa697c9c97ebf499f40248621d27b9, type: 3}
       propertyPath: m_fontColor.a
       value: 1

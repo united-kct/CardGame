@@ -38,13 +38,15 @@ namespace Common.MasterData
     {
         Rock,
         Scissors,
-        Paper
+        Paper,
+        Yoshimoto
     }
 
     public enum CardType
     {
         Fire,
         Water,
-        Grass
+        Grass,
+        Yoshimoto
     }
 }

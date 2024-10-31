@@ -10,6 +10,7 @@ namespace BattleField.Script.Judge {
     public class ViewJudge
     {
         public JudgementType JankenJudge(CardHand playerHand, CardHand enemyHand) {
+            if (playerHand == CardHand.Yoshimoto) return JudgementType.Win;
             int _result = (HandExchanger(playerHand) - HandExchanger(enemyHand) + 3) % 3;
             if (_result == 0) return JudgementType.Draw;
             if (_result == 1) return JudgementType.Lose;

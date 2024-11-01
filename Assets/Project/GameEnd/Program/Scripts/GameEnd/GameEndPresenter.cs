@@ -1,4 +1,6 @@
-﻿using Project.BattleField.Script.GameEnd;
+﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.CompilerServices;
+using Project.BattleField.Script.GameEnd;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
@@ -10,13 +12,14 @@ namespace Project.GameEnd.Program.Scripts.GameEnd
         [SerializeField] private VideoPlayer winVideo;
         [SerializeField] private VideoPlayer drawVideo;
         [SerializeField] private VideoPlayer loseVideo;
+        [SerializeField] private VideoPlayer ending;
 
         public void Initialize()
         {
             PlayGameEndVideo();
         }
 
-        private void PlayGameEndVideo()
+        private async UniTaskVoid PlayGameEndVideo()
         {
             switch (GameEndSceneData.GameResult)
             {
@@ -31,17 +34,17 @@ namespace Project.GameEnd.Program.Scripts.GameEnd
                     ActiveAndPrepareVideo(loseVideo);
                     break;
             }
+            
+            ending.gameObject.SetActive(true);
+            await UniTask.WaitUntil(() =>ending.isPaused);
+
+             SceneManager.LoadScene("Title");
         }
 
-        private static void ActiveAndPrepareVideo(VideoPlayer vp)
+        private static async UniTask ActiveAndPrepareVideo(VideoPlayer vp)
         {
             vp.gameObject.SetActive(true);
-            vp.loopPointReached += OnVideoComplete;
-        }
-
-        private static void OnVideoComplete(VideoPlayer _)
-        {
-            SceneManager.LoadScene("Title");
+            await UniTask.WaitUntil(() => vp.isPaused);
         }
     }
 }

@@ -10,6 +10,7 @@ using BattleField.Script.TimelineManagge;
 using BattleField.Script.Judge;
 using BattleField.Script.Janken;
 using Common.MasterData;
+using BattleField.Script.Effect;
 namespace BattleField.Script.Battle.Lose.Judge {
     public class Lose : MonoBehaviour
     {
@@ -20,11 +21,13 @@ namespace BattleField.Script.Battle.Lose.Judge {
         [SerializeField] TextEffect _damageTextEffect;
         [SerializeField] private JankenSelector _playerJankenSelector;
         [SerializeField] private JankenSelector _enemyJankenSelector;
+        [SerializeField] private EffectPresenter _enemyEffectPresenter;
         public async UniTask LoseProcess(Card playerCard, Card enemyCard, CancellationToken ct) {
             _lose.TimelinePlay();
-            _playerJankenSelector.SetOptions(playerCard.Hand);
-            _enemyJankenSelector.SetOptions(enemyCard.Hand);
+            _playerJankenSelector.SetOptions(playerCard.Hand,playerCard.Type);
+            _enemyJankenSelector.SetOptions(enemyCard.Hand,enemyCard.Type);
             await UniTask.WaitUntil(() => _lose.IsDone());
+            await UniTask.WhenAll(_enemyEffectPresenter.EffectProcess(enemyCard));
             DamageValue _damageValue = new DamageValue();
             int receiveDamage = _damageValue.CalcDamageValue(enemyCard.Power, enemyCard.Type, playerCard.Type);
             receiveDamage = _damageValue.DamageBalance(_playerhp.Health, receiveDamage);

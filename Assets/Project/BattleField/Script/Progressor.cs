@@ -99,14 +99,14 @@ namespace BattleField.Script.Progress
                 _round_Timeline.TimelinePlay();
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());
                 await UniTask.WhenAll(_turnPresenter.HandleTurn(ct));
-                fightDirector.Play();
-                await UniTask.WaitUntil(() => fightDirector.state == PlayState.Paused, cancellationToken: ct);
                 _playerCard = _playerPresenter.Cards.Last();
                 _playerIcon.sprite = Resources.Load<Sprite>("Images/"+_playerCard.ImageId);
                 var result = _enemyPresenter.SetCurrentCard(_enemyCardID);
                 _enemyCard = _enemyPresenter.Cards.Last();
                 _enemyIcon.sprite = Resources.Load<Sprite>("Images/"+_enemyCard.ImageId);
                 JudgementType judge = _viewJudge.JankenJudge(_playerCard.Hand, _enemyCard.Hand);
+                fightDirector.Play();
+                await UniTask.WaitUntil(() => fightDirector.state == PlayState.Paused, cancellationToken: ct);
                 //_janken_Timeline.TimelinePlay();
                 //_playerJankenSelector.SetOptions(_playerCard.Hand);
                 //_enemyJankenSelector.SetOptions(_enemyCard.Hand);

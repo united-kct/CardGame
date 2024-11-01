@@ -7,6 +7,7 @@ using System.Threading;
 using BattleField.Script.Damage;
 using BattleField.Script.HpBar.Model;
 using BattleField.Script.TimelineManagge;
+using BattleField.Script.Janken;
 using BattleField.Script.Judge;
 using Common.MasterData;
 
@@ -18,8 +19,12 @@ namespace BattleField.Script.Battle.Draw.Judge {
         [SerializeField] TimelineManagger _damageTimeline;
         [SerializeField] TimelineManagger _draw;
         [SerializeField] TextEffect _damageTextEffect;
+        [SerializeField] private JankenSelector _playerJankenSelector;
+        [SerializeField] private JankenSelector _enemyJankenSelector;
         public async UniTask DrawProcess(Card playerCard, Card enemyCard, CancellationToken ct) {
             _draw.TimelinePlay();
+            _playerJankenSelector.SetOptions(playerCard.Hand);
+            _enemyJankenSelector.SetOptions(enemyCard.Hand);
             await UniTask.WaitUntil(() => _draw.IsDone());
             DamageValue _damageValue = new DamageValue();
             int enemyReceiveDamage = _damageValue.CalcDamageValue(playerCard.Power, playerCard.Type, enemyCard.Type);

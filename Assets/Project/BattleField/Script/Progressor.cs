@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading;
 using Project.BattleField.Script.GameEnd;
 using Project.GameEnd.Program.Scripts;
+using Project.InGame.Program.Scripts.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,6 +36,9 @@ namespace BattleField.Script.Progress
         [SerializeField] private Lose _loseAction;
         [SerializeField] private HpBarModel _playerhp;
         [SerializeField] private HpBarModel _enemyhp;
+        [SerializeField] private AudioSource roundBgmAudioSource = null!;
+        [SerializeField] private AudioSource finalRoundBgmAudioSource = null!;
+        [SerializeField] private RoundAudioSource roundSeAudioSource = null!;
 
         //[SerializeField] private GameEndText _gameEndText;
         [SerializeField] private int turn;
@@ -69,6 +73,17 @@ namespace BattleField.Script.Progress
         {
             while (_turn <= _maxTurn)
             {
+                if (_turn == _maxTurn)
+                {
+                    roundBgmAudioSource.Stop();
+                    finalRoundBgmAudioSource.Play();
+                }
+                else if(_turn == 1)
+                {
+                    roundBgmAudioSource.Play();
+                }
+
+                roundSeAudioSource.Play(_turn);
                 _round.RoundCount(_turn);
                 _round_Timeline.TimelinePlay();
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());

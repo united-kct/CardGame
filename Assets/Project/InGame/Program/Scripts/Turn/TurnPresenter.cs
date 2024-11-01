@@ -16,6 +16,7 @@ namespace InGame.Turn
         private ScannerModel _scannerModel = null!;
         private int _maxTurn;
         [SerializeField] private TextMeshProUGUI _cardScanMessage = null!;
+        [SerializeField] private AudioSource cardScanAudioSource = null!;
 
         public void Initialize(PlayerPresenter player, PlayerPresenter opponentPlayer, ScannerModel scannerModel, int maxTurn)
         {
@@ -54,6 +55,9 @@ namespace InGame.Turn
                 );
             }, cancellationToken: ct);
 
+            cardScanAudioSource.Play();
+            await UniTask.WaitUntil(()=>!cardScanAudioSource.isPlaying, cancellationToken: ct);
+            
             _cardScanMessage.text = string.Empty;
             _cardScanMessage.enabled = false;
             //CompareCard();

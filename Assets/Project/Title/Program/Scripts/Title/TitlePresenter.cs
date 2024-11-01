@@ -1,8 +1,8 @@
 #nullable enable
 
+using System.Threading;
 using Common.QRCode;
-using R3;
-using R3.Triggers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,19 +11,28 @@ namespace Project.Title.Program.Scripts.Title
     public class TitlePresenter : MonoBehaviour
     {
         private ScannerModel _scannerModel = null!;
+        [SerializeField] private AudioSource cardScanAudioSource = null!;
         
         public void Initialize(ScannerModel scannerModel)
         {
             _scannerModel = scannerModel;
 
-            this.UpdateAsObservable().Subscribe(_ => OnScan()).AddTo(this);
+            var ct = this.GetCancellationTokenOnDestroy();
+            A(ct).Forget();
         }
-
-        private void OnScan()
+        
+        private async UniTaskVoid A(CancellationToken ct)
         {
-            if (_scannerModel.QrScanResult != "")
+            while (true)
             {
-                SceneManager.LoadScene("RuleExplanation");
+                if (_scannerModel.QrScanResult != "")
+                {
+                    cardScanAudioSource.Play();
+                    await UniTask.WaitUntil(()=> !cardScanAudioSource.isPlaying, cancellationToken:ct);
+                    SceneManager.LoadScene("RuleExplanation");
+                }
+
+                await UniTask.Yield(PlayerLoopTiming.Update, ct);
             }
         }
     }

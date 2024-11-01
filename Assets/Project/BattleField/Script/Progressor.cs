@@ -2,7 +2,6 @@
 using BattleField.Script.Battle.Lose.Judge;
 using BattleField.Script.Battle.Win.Judge;
 using BattleField.Script.HpBar.Model;
-using BattleField.Script.Janken;
 using BattleField.Script.Judge;
 using BattleField.Script.TimelineManagge;
 using Common.MasterData;
@@ -13,7 +12,9 @@ using InGame.Turn;
 using System.Linq;
 using System.Threading;
 using Project.BattleField.Script.GameEnd;
+using Project.GameEnd.Program.Scripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BattleField.Script.Progress
 {
@@ -23,16 +24,15 @@ namespace BattleField.Script.Progress
         [SerializeField] private TurnPresenter _turnPresenter;
 
         [SerializeField] private TimelineManagger _round_Timeline;
-        [SerializeField] private TimelineManagger _janken_Timeline;
-        [SerializeField] private JankenSelector _playerJankenSelector;
-        [SerializeField] private JankenSelector _enemyJankenSelector;
+        //[SerializeField] private TimelineManagger _janken_Timeline;
+        //[SerializeField] private JankenSelector _playerJankenSelector;
+        //[SerializeField] private JankenSelector _enemyJankenSelector;
         [SerializeField] private TextEffect _damageTextEffect;
         [SerializeField] private Round _round;
         [SerializeField] private TimelineManagger _damage_Timeline;
         [SerializeField] private Win _winAction;
         [SerializeField] private Draw _drawAction;
         [SerializeField] private Lose _loseAction;
-        [SerializeField] private GameEndDirector _gameEndDirector;
         [SerializeField] private HpBarModel _playerhp;
         [SerializeField] private HpBarModel _enemyhp;
 
@@ -73,20 +73,20 @@ namespace BattleField.Script.Progress
                 _playerCard = _playerPresenter.Cards.Last();
                 _enemyCard = new Card("1", 1000, CardHand.Rock, CardType.Fire, "1");
                 JudgementType judge = _viewJudge.JankenJudge(_playerCard.Hand, _enemyCard.Hand);
-                _janken_Timeline.TimelinePlay();
-                _playerJankenSelector.SetOptions(_playerCard.Hand);
-                _enemyJankenSelector.SetOptions(_enemyCard.Hand);
-                await UniTask.WaitUntil(() => _janken_Timeline.IsDone());
+                //_janken_Timeline.TimelinePlay();
+                //_playerJankenSelector.SetOptions(_playerCard.Hand);
+                //_enemyJankenSelector.SetOptions(_enemyCard.Hand);
+                //await UniTask.WaitUntil(() => _janken_Timeline.IsDone());
                 if (judge == JudgementType.Win) await UniTask.WhenAll(_winAction.WinProcess(_playerCard, _enemyCard, ct));
                 else if (judge == JudgementType.Draw) await UniTask.WhenAll(_drawAction.DrawProcess(_playerCard, _enemyCard, ct));
                 else await UniTask.WhenAll(_loseAction.LoseProcess(_playerCard, _enemyCard, ct));
                 _turn++;
             }
 
-            GameResult gameResult =
+            GameEndSceneData.GameResult =
                 _playerhp.Health == _enemyhp.Health ? GameResult.Draw :
                 _playerhp.Health > _enemyhp.Health ? GameResult.Win : GameResult.Lose;
-            await _gameEndDirector.PlayDirector(gameResult, ct);
+            SceneManager.LoadScene("GameEnd");
         }
     }
 }

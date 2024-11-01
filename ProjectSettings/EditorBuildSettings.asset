@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/BattleField/Scene/BattleField.unity
     guid: 760c8117cfaf5034baadb833b20b1703
+  - enabled: 1
+    path: Assets/Project/RuleExplanation/Program/Scenes/RuleExplanation.unity
+    guid: 5ede1715d83ed4b9d9ce3d7656d3e4b2
+  - enabled: 1
+    path: Assets/Project/GameEnd/Program/Scenes/GameEnd.unity
+    guid: e920dfd265e6c44bca1bf882fba9520e
   m_configObjects: {}

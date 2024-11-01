@@ -47,6 +47,10 @@ namespace BattleField.Script.Progress
 
         //[SerializeField] private GameEndText _gameEndText;
         [SerializeField] private int turn;
+        [SerializeField] private TimelineManagger _pCardSummon;
+        [SerializeField] private TimelineManagger _eCardSummon;
+        [SerializeField] private SpriteRenderer _pCard;
+        [SerializeField] private SpriteRenderer _eCard;
 
         private Card _playerCard;
         private Card _enemyCard;
@@ -76,6 +80,14 @@ namespace BattleField.Script.Progress
         {
         }
 
+        public void SetPlayer() {
+            _playerIcon.sprite = Resources.Load<Sprite>("Images/"+_playerCard.ImageId);
+        }
+
+        public void SetEnemy() {
+            _enemyIcon.sprite = Resources.Load<Sprite>("Images/"+_enemyCard.ImageId);
+        }
+
         private async UniTaskVoid Role(CancellationToken ct)
         {
             var _enemyIdSet = _enemyDataSets.EnemySetReceiver();
@@ -100,10 +112,14 @@ namespace BattleField.Script.Progress
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());
                 await UniTask.WhenAll(_turnPresenter.HandleTurn(ct));
                 _playerCard = _playerPresenter.Cards.Last();
-                _playerIcon.sprite = Resources.Load<Sprite>("Images/"+_playerCard.ImageId);
                 var result = _enemyPresenter.SetCurrentCard(_enemyCardID);
                 _enemyCard = _enemyPresenter.Cards.Last();
-                _enemyIcon.sprite = Resources.Load<Sprite>("Images/"+_enemyCard.ImageId);
+                _pCardSummon.TimelinePlay();
+                _pCard.sprite = Resources.Load<Sprite>("Cards/"+_playerCard.ImageId);
+                await UniTask.WaitUntil(() => _pCardSummon.IsDone());
+                _eCardSummon.TimelinePlay();
+                _eCard.sprite = Resources.Load<Sprite>("Cards/"+_enemyCard.ImageId);
+                await UniTask.WaitUntil(() => _eCardSummon.IsDone());
                 JudgementType judge = _viewJudge.JankenJudge(_playerCard.Hand, _enemyCard.Hand);
                 fightDirector.Play();
                 await UniTask.WaitUntil(() => fightDirector.state == PlayState.Paused, cancellationToken: ct);

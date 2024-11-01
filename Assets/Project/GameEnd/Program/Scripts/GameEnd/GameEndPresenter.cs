@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Project.BattleField.Script.GameEnd;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
@@ -6,12 +7,36 @@ namespace Project.GameEnd.Program.Scripts.GameEnd
 {
     public class GameEndPresenter : MonoBehaviour
     {
-        [SerializeField] private VideoPlayer videoPlayer;
+        [SerializeField] private VideoPlayer winVideo;
+        [SerializeField] private VideoPlayer drawVideo;
+        [SerializeField] private VideoPlayer loseVideo;
 
         public void Initialize()
         {
-            UnityEngine.Debug.Log(GameEndSceneData.GameResult);
-            videoPlayer.loopPointReached += OnVideoComplete;
+            PlayGameEndVideo();
+        }
+
+        private void PlayGameEndVideo()
+        {
+            switch (GameEndSceneData.GameResult)
+            {
+                case GameResult.Win:
+                    ActiveAndPrepareVideo(winVideo);
+                    break;
+                case GameResult.Draw:
+                    ActiveAndPrepareVideo(drawVideo);
+                    break;
+                case GameResult.Lose:
+                default:
+                    ActiveAndPrepareVideo(loseVideo);
+                    break;
+            }
+        }
+
+        private static void ActiveAndPrepareVideo(VideoPlayer vp)
+        {
+            vp.gameObject.SetActive(true);
+            vp.loopPointReached += OnVideoComplete;
         }
 
         private static void OnVideoComplete(VideoPlayer _)

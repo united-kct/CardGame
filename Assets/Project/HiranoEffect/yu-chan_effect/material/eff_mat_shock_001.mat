@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: eff_mat_shock_001
-  m_Shader: {fileID: -6465566751694194690, guid: 08855caace4d1434db30f5782aca8784, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 01c99a4e247795844a306c46c460d94e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Default_Particle:
-        m_Texture: {fileID: 2800000, guid: a122545123974d44a8dbfd6122cb4bae, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8774b26656b22f741bacd8ba3e0c9b3f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -86,6 +86,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_5d7aa3dcc74e42bca20e7a487a584206_Out_0_Texture2D:
         m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_a4f24eaee5a442ebaca7281e3db01cda_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: f8291e8a31ad8024eac45dff2177c60a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -138,4 +142,5 @@ Material:
     - _Color: {r: 42.722507, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0.039546248, g: 0.039546248, b: 0.039546248, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _main_tex: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

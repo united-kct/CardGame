@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: eff_mat_barrier_001
-  m_Shader: {fileID: -6465566751694194690, guid: a1f330606257a1f439292edc6d8a5436, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 967b3c40d141ec64cb7ecbd738adad5a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -42,6 +42,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Default_Particle:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -81,7 +85,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_7001546224564875a17f91dc632af78b_Out_0_Texture2D:
-        m_Texture: {fileID: 2800000, guid: e178d7eb051b4f54ca96ef86eeea15d8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 07a147bf4accb2c40a25f4cfd2115583, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:

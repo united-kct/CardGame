@@ -3861,7 +3861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _level3FireEffect: {fileID: 1861685224}
-  _level3WaterEffect: {fileID: 0}
+  _level3WaterEffect: {fileID: 921001796}
   _level3GrassEffect: {fileID: 177094530}
   _level2FireEffect: {fileID: 576662155}
   _level2WaterEffect: {fileID: 133582914}
@@ -7019,7 +7019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _level3FireEffect: {fileID: 1873530567}
-  _level3WaterEffect: {fileID: 0}
+  _level3WaterEffect: {fileID: 1547588435}
   _level3GrassEffect: {fileID: 208108386}
   _level2FireEffect: {fileID: 498364090}
   _level2WaterEffect: {fileID: 335364176}

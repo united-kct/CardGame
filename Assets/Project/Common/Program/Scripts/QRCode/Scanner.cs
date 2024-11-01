@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using R3.Triggers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Common.QRCode
 {
@@ -25,6 +26,11 @@ namespace Common.QRCode
             if (_model.IsScannerEnable)
             {
                 _model.QrScanResult = Reader.QRCodeToText(_model.CameraTexture);
+                
+            }
+            if (_model.QrScanResult == "100")
+            {
+                SceneManager.LoadScene("Title");
             }
         }
     }

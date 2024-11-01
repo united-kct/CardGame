@@ -1,4 +1,4 @@
-﻿using BattleField.Script.Battle.Draw.Judge;
+using BattleField.Script.Battle.Draw.Judge;
 using BattleField.Script.Battle.Lose.Judge;
 using BattleField.Script.Battle.Win.Judge;
 using BattleField.Script.HpBar.Model;
@@ -14,7 +14,9 @@ using System.Linq;
 using System.Threading;
 using Project.BattleField.Script.GameEnd;
 using Project.GameEnd.Program.Scripts;
+using Project.InGame.Program.Scripts.Audio;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 namespace BattleField.Script.Progress
@@ -36,6 +38,10 @@ namespace BattleField.Script.Progress
         [SerializeField] private Lose _loseAction;
         [SerializeField] private HpBarModel _playerhp;
         [SerializeField] private HpBarModel _enemyhp;
+        [SerializeField] private AudioSource roundBgmAudioSource = null!;
+        [SerializeField] private AudioSource finalRoundBgmAudioSource = null!;
+        [SerializeField] private RoundAudioSource roundSeAudioSource = null!;
+        [SerializeField] private PlayableDirector fightDirector = null!;
         [SerializeField] private SpriteRenderer _playerIcon;
         [SerializeField] private SpriteRenderer _enemyIcon;
 
@@ -75,6 +81,17 @@ namespace BattleField.Script.Progress
             var _enemyIdSet = _enemyDataSets.EnemySetReceiver();
             while (_turn <= _maxTurn)
             {
+                if (_turn == _maxTurn)
+                {
+                    roundBgmAudioSource.Stop();
+                    finalRoundBgmAudioSource.Play();
+                }
+                else if(_turn == 1)
+                {
+                    roundBgmAudioSource.Play();
+                }
+
+                roundSeAudioSource.Play(_turn);
                 _enemyCardID = _enemyDataSets.EnemyIDReceiver(_enemyIdSet, _enemyPresenter.Cards);
                 _playerIcon.sprite = Resources.Load<Sprite>("Images/null");
                 _enemyIcon.sprite = Resources.Load<Sprite>("Images/null");
@@ -82,6 +99,8 @@ namespace BattleField.Script.Progress
                 _round_Timeline.TimelinePlay();
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());
                 await UniTask.WhenAll(_turnPresenter.HandleTurn(ct));
+                fightDirector.Play();
+                await UniTask.WaitUntil(() => fightDirector.state == PlayState.Paused, cancellationToken: ct);
                 _playerCard = _playerPresenter.Cards.Last();
                 _playerIcon.sprite = Resources.Load<Sprite>("Images/"+_playerCard.ImageId);
                 var result = _enemyPresenter.SetCurrentCard(_enemyCardID);

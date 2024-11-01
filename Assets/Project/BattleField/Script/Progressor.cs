@@ -41,9 +41,11 @@ namespace BattleField.Script.Progress
 
         private Card _playerCard;
         private Card _enemyCard;
+        private string _enemyCardID;
         private int _turn = 1;
         private int _maxTurn;
         private PlayerPresenter _playerPresenter;
+        private PlayerPresenter _enemyPresenter;
         private GameSettings _gameSettings;
         private ViewJudge _viewJudge;
 
@@ -52,6 +54,7 @@ namespace BattleField.Script.Progress
             _viewJudge = new ViewJudge();
             _gameSettings = gameSettings;
             _playerPresenter = gameSettings.Player;
+            _enemyPresenter =　gameSettings.Player;
             _maxTurn = _gameSettings.MaxTurn;
             CancellationToken ct = this.GetCancellationTokenOnDestroy();
             Role(ct).Forget();
@@ -71,7 +74,8 @@ namespace BattleField.Script.Progress
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());
                 await UniTask.WhenAll(_turnPresenter.HandleTurn(ct));
                 _playerCard = _playerPresenter.Cards.Last();
-                _enemyCard = new Card("1", 1000, CardHand.Rock, CardType.Fire, "1");
+                var result = _enemyPresenter.SetCurrentCard(_enemyCardID);
+                _enemyCard = _enemyPresenter.Cards.Last();
                 JudgementType judge = _viewJudge.JankenJudge(_playerCard.Hand, _enemyCard.Hand);
                 //_janken_Timeline.TimelinePlay();
                 //_playerJankenSelector.SetOptions(_playerCard.Hand);

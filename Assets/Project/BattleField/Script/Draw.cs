@@ -28,9 +28,13 @@ namespace BattleField.Script.Battle.Draw.Judge {
             await UniTask.WaitUntil(() => _draw.IsDone());
             DamageValue _damageValue = new DamageValue();
             int enemyReceiveDamage = _damageValue.CalcDamageValue(playerCard.Power, playerCard.Type, enemyCard.Type);
+            enemyReceiveDamage = _damageValue.DamageBalance(_enemyhp.Health, enemyReceiveDamage);
             _enemyhp.Health -= enemyReceiveDamage;
+            enemyReceiveDamage = _damageValue.CalcDamageValue(playerCard.Power, playerCard.Type, enemyCard.Type);
             int playerReceiveDamage = _damageValue.CalcDamageValue(enemyCard.Power, enemyCard.Type, playerCard.Type);
+            playerReceiveDamage = _damageValue.DamageBalance(_playerhp.Health, playerReceiveDamage);
             _playerhp.Health -= playerReceiveDamage;
+            playerReceiveDamage = _damageValue.CalcDamageValue(enemyCard.Power, enemyCard.Type, playerCard.Type);
             _damageTextEffect.WinDamaged(enemyReceiveDamage);
             _damageTimeline.TimelinePlay();
             await UniTask.WaitUntil(() => _damageTimeline.IsDone());

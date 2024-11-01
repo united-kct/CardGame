@@ -1,9 +1,10 @@
-﻿using BattleField.Script.Battle.Draw.Judge;
+using BattleField.Script.Battle.Draw.Judge;
 using BattleField.Script.Battle.Lose.Judge;
 using BattleField.Script.Battle.Win.Judge;
 using BattleField.Script.HpBar.Model;
 using BattleField.Script.Judge;
 using BattleField.Script.TimelineManagge;
+using BattleField.Script.EnemyData;
 using Common.MasterData;
 using Cysharp.Threading.Tasks;
 using InGame;
@@ -41,6 +42,8 @@ namespace BattleField.Script.Progress
         [SerializeField] private AudioSource finalRoundBgmAudioSource = null!;
         [SerializeField] private RoundAudioSource roundSeAudioSource = null!;
         [SerializeField] private PlayableDirector fightDirector = null!;
+        [SerializeField] private SpriteRenderer _playerIcon;
+        [SerializeField] private SpriteRenderer _enemyIcon;
 
         //[SerializeField] private GameEndText _gameEndText;
         [SerializeField] private int turn;
@@ -54,13 +57,15 @@ namespace BattleField.Script.Progress
         private PlayerPresenter _enemyPresenter;
         private GameSettings _gameSettings;
         private ViewJudge _viewJudge;
+        private EnemyDataSets _enemyDataSets;
 
         public void Initialize(GameSettings gameSettings)
         {
+            _enemyDataSets = new EnemyDataSets();
             _viewJudge = new ViewJudge();
             _gameSettings = gameSettings;
             _playerPresenter = gameSettings.Player;
-            _enemyPresenter =　gameSettings.Player;
+            _enemyPresenter =　gameSettings.OpponentPlayer;
             _maxTurn = _gameSettings.MaxTurn;
             CancellationToken ct = this.GetCancellationTokenOnDestroy();
             Role(ct).Forget();
@@ -73,6 +78,7 @@ namespace BattleField.Script.Progress
 
         private async UniTaskVoid Role(CancellationToken ct)
         {
+            var _enemyIdSet = _enemyDataSets.EnemySetReceiver();
             while (_turn <= _maxTurn)
             {
                 if (_turn == _maxTurn)
@@ -86,6 +92,9 @@ namespace BattleField.Script.Progress
                 }
 
                 roundSeAudioSource.Play(_turn);
+                _enemyCardID = _enemyDataSets.EnemyIDReceiver(_enemyIdSet, _enemyPresenter.Cards);
+                _playerIcon.sprite = Resources.Load<Sprite>("Images/null");
+                _enemyIcon.sprite = Resources.Load<Sprite>("Images/null");
                 _round.RoundCount(_turn);
                 _round_Timeline.TimelinePlay();
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());
@@ -93,8 +102,10 @@ namespace BattleField.Script.Progress
                 fightDirector.Play();
                 await UniTask.WaitUntil(() => fightDirector.state == PlayState.Paused, cancellationToken: ct);
                 _playerCard = _playerPresenter.Cards.Last();
+                _playerIcon.sprite = Resources.Load<Sprite>("Images/"+_playerCard.ImageId);
                 var result = _enemyPresenter.SetCurrentCard(_enemyCardID);
                 _enemyCard = _enemyPresenter.Cards.Last();
+                _enemyIcon.sprite = Resources.Load<Sprite>("Images/"+_enemyCard.ImageId);
                 JudgementType judge = _viewJudge.JankenJudge(_playerCard.Hand, _enemyCard.Hand);
                 //_janken_Timeline.TimelinePlay();
                 //_playerJankenSelector.SetOptions(_playerCard.Hand);
@@ -103,6 +114,7 @@ namespace BattleField.Script.Progress
                 if (judge == JudgementType.Win) await UniTask.WhenAll(_winAction.WinProcess(_playerCard, _enemyCard, ct));
                 else if (judge == JudgementType.Draw) await UniTask.WhenAll(_drawAction.DrawProcess(_playerCard, _enemyCard, ct));
                 else await UniTask.WhenAll(_loseAction.LoseProcess(_playerCard, _enemyCard, ct));
+                if (_playerhp.Health <= 0 || _enemyhp.Health <= 0) break;
                 _turn++;
             }
 

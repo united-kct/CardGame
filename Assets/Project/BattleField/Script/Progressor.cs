@@ -35,6 +35,8 @@ namespace BattleField.Script.Progress
         [SerializeField] private Lose _loseAction;
         [SerializeField] private HpBarModel _playerhp;
         [SerializeField] private HpBarModel _enemyhp;
+        [SerializeField] private AudioSource roundAudioSource = null!;
+        [SerializeField] private AudioSource finalRoundAudioSource = null!;
 
         //[SerializeField] private GameEndText _gameEndText;
         [SerializeField] private int turn;
@@ -69,6 +71,16 @@ namespace BattleField.Script.Progress
         {
             while (_turn <= _maxTurn)
             {
+                if (_turn == _maxTurn)
+                {
+                    roundAudioSource.Stop();
+                    finalRoundAudioSource.Play();
+                }
+                else if(_turn == 1)
+                {
+                    roundAudioSource.Play();
+                }
+                
                 _round.RoundCount(_turn);
                 _round_Timeline.TimelinePlay();
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());

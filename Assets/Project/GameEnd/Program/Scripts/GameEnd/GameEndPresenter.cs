@@ -2,9 +2,9 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
-namespace Project.RuleExplanation.Program.Scripts.RuleExplanation
+namespace Project.GameEnd.Program.Scripts.GameEnd
 {
-    public class RuleExplanationPresenter : MonoBehaviour
+    public class GameEndPresenter : MonoBehaviour
     {
         [SerializeField] private VideoPlayer videoPlayer;
 
@@ -15,7 +15,7 @@ namespace Project.RuleExplanation.Program.Scripts.RuleExplanation
 
         private static void OnVideoComplete(VideoPlayer _)
         {
-            SceneManager.LoadScene("BattleField");
+            SceneManager.LoadScene("Title");
         }
     }
 }

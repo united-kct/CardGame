@@ -868,16 +868,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _turnPresenter: {fileID: 0}
   _round_Timeline: {fileID: 1503841805}
-  _janken_Timeline: {fileID: 1861658701}
-  _playerJankenSelector: {fileID: 0}
-  _enemyJankenSelector: {fileID: 0}
   _damageTextEffect: {fileID: 5456326779037908134}
   _round: {fileID: 0}
   _damage_Timeline: {fileID: 1836929079}
   _winAction: {fileID: 0}
   _drawAction: {fileID: 0}
   _loseAction: {fileID: 0}
-  _gameEndDirector: {fileID: 0}
   _playerhp: {fileID: 0}
   _enemyhp: {fileID: 0}
   turn: 0

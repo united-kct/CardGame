@@ -23,8 +23,7 @@ namespace Project.Title.Program.Scripts.Title
         {
             if (_scannerModel.QrScanResult != "")
             {
-                UnityEngine.Debug.Log("switch scene");
-                SceneManager.LoadScene("BattleField");
+                SceneManager.LoadScene("RuleExplanation");
             }
         }
     }

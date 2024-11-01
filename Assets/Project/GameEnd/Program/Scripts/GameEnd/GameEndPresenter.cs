@@ -10,6 +10,7 @@ namespace Project.GameEnd.Program.Scripts.GameEnd
 
         public void Initialize()
         {
+            UnityEngine.Debug.Log(GameEndSceneData.GameResult);
             videoPlayer.loopPointReached += OnVideoComplete;
         }
 

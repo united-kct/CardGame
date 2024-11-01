@@ -2,7 +2,6 @@
 using BattleField.Script.Battle.Lose.Judge;
 using BattleField.Script.Battle.Win.Judge;
 using BattleField.Script.HpBar.Model;
-using BattleField.Script.Janken;
 using BattleField.Script.Judge;
 using BattleField.Script.TimelineManagge;
 using Common.MasterData;
@@ -13,7 +12,9 @@ using InGame.Turn;
 using System.Linq;
 using System.Threading;
 using Project.BattleField.Script.GameEnd;
+using Project.GameEnd.Program.Scripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BattleField.Script.Progress
 {
@@ -32,7 +33,6 @@ namespace BattleField.Script.Progress
         [SerializeField] private Win _winAction;
         [SerializeField] private Draw _drawAction;
         [SerializeField] private Lose _loseAction;
-        [SerializeField] private GameEndDirector _gameEndDirector;
         [SerializeField] private HpBarModel _playerhp;
         [SerializeField] private HpBarModel _enemyhp;
 
@@ -83,10 +83,10 @@ namespace BattleField.Script.Progress
                 _turn++;
             }
 
-            GameResult gameResult =
+            GameEndSceneData.GameResult =
                 _playerhp.Health == _enemyhp.Health ? GameResult.Draw :
                 _playerhp.Health > _enemyhp.Health ? GameResult.Win : GameResult.Lose;
-            await _gameEndDirector.PlayDirector(gameResult, ct);
+            SceneManager.LoadScene("GameEnd");
         }
     }
 }

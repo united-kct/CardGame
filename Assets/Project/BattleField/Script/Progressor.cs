@@ -15,6 +15,7 @@ using Project.BattleField.Script.GameEnd;
 using Project.GameEnd.Program.Scripts;
 using Project.InGame.Program.Scripts.Audio;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 namespace BattleField.Script.Progress
@@ -39,6 +40,7 @@ namespace BattleField.Script.Progress
         [SerializeField] private AudioSource roundBgmAudioSource = null!;
         [SerializeField] private AudioSource finalRoundBgmAudioSource = null!;
         [SerializeField] private RoundAudioSource roundSeAudioSource = null!;
+        [SerializeField] private PlayableDirector fightDirector = null!;
 
         //[SerializeField] private GameEndText _gameEndText;
         [SerializeField] private int turn;
@@ -88,6 +90,8 @@ namespace BattleField.Script.Progress
                 _round_Timeline.TimelinePlay();
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());
                 await UniTask.WhenAll(_turnPresenter.HandleTurn(ct));
+                fightDirector.Play();
+                await UniTask.WaitUntil(() => fightDirector.state == PlayState.Paused, cancellationToken: ct);
                 _playerCard = _playerPresenter.Cards.Last();
                 var result = _enemyPresenter.SetCurrentCard(_enemyCardID);
                 _enemyCard = _enemyPresenter.Cards.Last();

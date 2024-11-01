@@ -4,6 +4,7 @@ using BattleField.Script.Battle.Win.Judge;
 using BattleField.Script.HpBar.Model;
 using BattleField.Script.Judge;
 using BattleField.Script.TimelineManagge;
+using BattleField.Script.EnemyData;
 using Common.MasterData;
 using Cysharp.Threading.Tasks;
 using InGame;
@@ -50,9 +51,11 @@ namespace BattleField.Script.Progress
         private PlayerPresenter _enemyPresenter;
         private GameSettings _gameSettings;
         private ViewJudge _viewJudge;
+        private EnemyDataSets _enemyDataSets;
 
         public void Initialize(GameSettings gameSettings)
         {
+            _enemyDataSets = new EnemyDataSets();
             _viewJudge = new ViewJudge();
             _gameSettings = gameSettings;
             _playerPresenter = gameSettings.Player;
@@ -69,9 +72,10 @@ namespace BattleField.Script.Progress
 
         private async UniTaskVoid Role(CancellationToken ct)
         {
-            _enemyCardID = "1";
+            var _enemyIdSet = _enemyDataSets.EnemySetReceiver();
             while (_turn <= _maxTurn)
             {
+                _enemyCardID = _enemyDataSets.EnemyIDReceiver(_enemyIdSet, _enemyPresenter.Cards);
                 _playerIcon.sprite = Resources.Load<Sprite>("Images/null");
                 _enemyIcon.sprite = Resources.Load<Sprite>("Images/null");
                 _round.RoundCount(_turn);

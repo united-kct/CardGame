@@ -23,9 +23,9 @@ namespace BattleField.Script.Progress
         [SerializeField] private TurnPresenter _turnPresenter;
 
         [SerializeField] private TimelineManagger _round_Timeline;
-        [SerializeField] private TimelineManagger _janken_Timeline;
-        [SerializeField] private JankenSelector _playerJankenSelector;
-        [SerializeField] private JankenSelector _enemyJankenSelector;
+        //[SerializeField] private TimelineManagger _janken_Timeline;
+        //[SerializeField] private JankenSelector _playerJankenSelector;
+        //[SerializeField] private JankenSelector _enemyJankenSelector;
         [SerializeField] private TextEffect _damageTextEffect;
         [SerializeField] private Round _round;
         [SerializeField] private TimelineManagger _damage_Timeline;
@@ -73,10 +73,10 @@ namespace BattleField.Script.Progress
                 _playerCard = _playerPresenter.Cards.Last();
                 _enemyCard = new Card("1", 1000, CardHand.Rock, CardType.Fire, "1");
                 JudgementType judge = _viewJudge.JankenJudge(_playerCard.Hand, _enemyCard.Hand);
-                _janken_Timeline.TimelinePlay();
-                _playerJankenSelector.SetOptions(_playerCard.Hand);
-                _enemyJankenSelector.SetOptions(_enemyCard.Hand);
-                await UniTask.WaitUntil(() => _janken_Timeline.IsDone());
+                //_janken_Timeline.TimelinePlay();
+                //_playerJankenSelector.SetOptions(_playerCard.Hand);
+                //_enemyJankenSelector.SetOptions(_enemyCard.Hand);
+                //await UniTask.WaitUntil(() => _janken_Timeline.IsDone());
                 if (judge == JudgementType.Win) await UniTask.WhenAll(_winAction.WinProcess(_playerCard, _enemyCard, ct));
                 else if (judge == JudgementType.Draw) await UniTask.WhenAll(_drawAction.DrawProcess(_playerCard, _enemyCard, ct));
                 else await UniTask.WhenAll(_loseAction.LoseProcess(_playerCard, _enemyCard, ct));

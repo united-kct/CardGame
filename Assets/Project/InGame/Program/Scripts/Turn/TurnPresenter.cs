@@ -4,6 +4,7 @@ using Common.QRCode;
 using Cysharp.Threading.Tasks;
 using InGame.Player;
 using System.Threading;
+using Project.Common.Program.Scripts.Audio;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace InGame.Turn
         private int _maxTurn;
         [SerializeField] private TextMeshProUGUI _cardScanMessage = null!;
         [SerializeField] private AudioSource cardScanAudioSource = null!;
+        [SerializeField] private DelayLoopAudioSource loadCardVoiceAudioSource = null!;
 
         public void Initialize(PlayerPresenter player, PlayerPresenter opponentPlayer, ScannerModel scannerModel, int maxTurn)
         {
@@ -34,6 +36,7 @@ namespace InGame.Turn
         {
             _cardScanMessage.enabled = true;
             _cardScanMessage.text = "カードを読み込もう";
+            loadCardVoiceAudioSource.gameObject.SetActive(true);
             //_opponentPlayer.SetCurrentCard(new(CardHand.Scissors, CardType.Grass, 1000));
             await UniTask.WaitUntil(() =>
             {
@@ -54,7 +57,8 @@ namespace InGame.Turn
                     }
                 );
             }, cancellationToken: ct);
-
+            
+            loadCardVoiceAudioSource.gameObject.SetActive(false);
             cardScanAudioSource.Play();
             await UniTask.WaitUntil(()=>!cardScanAudioSource.isPlaying, cancellationToken: ct);
             

@@ -71,7 +71,12 @@ namespace BattleField.Script.Effect {
                         await UniTask.WaitUntil(() => _level1GrassEffect.IsDone());
                     }
                 }
-            }
+            } else if (card.Type == CardType.Yoshimoto) {
+                    _level3FireEffect.TimelinePlay();
+                    _level3WaterEffect.TimelinePlay();
+                    _level3GrassEffect.TimelinePlay();
+                    await UniTask.WaitUntil(() => _level3GrassEffect.IsDone());
+                }
         }
     }
 }

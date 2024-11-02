@@ -2723,6 +2723,7 @@ MonoBehaviour:
   fightDirector: {fileID: 484350235}
   _playerIcon: {fileID: 700308223}
   _enemyIcon: {fileID: 1502194116}
+  tehuda: {fileID: 0}
   turn: 0
   _pCardSummon: {fileID: 1416402303}
   _eCardSummon: {fileID: 2027015420}

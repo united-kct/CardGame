@@ -11,7 +11,7 @@ namespace Project.Title.Program.Scripts.Main
     {
         private ScannerModel _scannerModel = null!;
         [SerializeField] private Scanner scanner = null!;
-        [SerializeField] private MainPage debugPage = null!;
+        // [SerializeField] private MainPage debugPage = null!;
         [SerializeField] private TitlePresenter title = null!;
 
         private void Start()
@@ -21,9 +21,9 @@ namespace Project.Title.Program.Scripts.Main
             scanner.Initialize(_scannerModel);
             title.Initialize(_scannerModel);
         
-#if !EXCLUDE_UNITY_DEBUG_SHEET
-            debugPage.Initialize(_scannerModel);
-#endif    
+// #if !EXCLUDE_UNITY_DEBUG_SHEET
+//             debugPage.Initialize(_scannerModel);
+// #endif    
         }
     }
 }

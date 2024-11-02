@@ -16,7 +16,7 @@ namespace Project.InGame.Program.Scripts.Game
         [SerializeField] private Scanner scanner = null!;
         [SerializeField] private TurnPresenter turn = null!;
         [SerializeField] private Progressor progressor = null!;
-        [SerializeField] private InGamePage debugController = null!;
+        // [SerializeField] private InGamePage debugController = null!;
 
         private void Start()
         {
@@ -27,9 +27,9 @@ namespace Project.InGame.Program.Scripts.Game
             turn.Initialize(_gameSettings.Player, _gameSettings.OpponentPlayer, _scannerModel, _gameSettings.MaxTurn);
             progressor.Initialize(_gameSettings);
 
-#if !EXCLUDE_UNITY_DEBUG_SHEET
-            debugController.Initialize(_scannerModel);
-#endif
+// #if !EXCLUDE_UNITY_DEBUG_SHEET
+//             debugController.Initialize(_scannerModel);
+// #endif
         }
     }
 }

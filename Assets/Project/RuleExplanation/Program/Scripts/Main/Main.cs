@@ -9,7 +9,7 @@ namespace Project.RuleExplanation.Program.Scripts.Main
     {
         private ScannerModel _scannerModel = null!;
         [SerializeField] private Scanner scanner = null!;
-        [SerializeField] private RuleExplanationPage debugPage = null!;
+        // [SerializeField] private RuleExplanationPage debugPage = null!;
         [SerializeField] private RuleExplanationPresenter ruleExplanation = null!;
 
         private void Start()
@@ -19,9 +19,9 @@ namespace Project.RuleExplanation.Program.Scripts.Main
             scanner.Initialize(_scannerModel);
             ruleExplanation.Initialize();
         
-#if !EXCLUDE_UNITY_DEBUG_SHEET
-            debugPage.Initialize(_scannerModel);
-#endif    
+// #if !EXCLUDE_UNITY_DEBUG_SHEET
+//             debugPage.Initialize(_scannerModel);
+// #endif    
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Common.QRCode
         {
             Width = 200;
             Height = 200;
-            CameraTexture = new(Width, Height)
+            CameraTexture = new(WebCamTexture.devices[1].name, Width, Height)
             {
                 autoFocusPoint = new Vector2(Width * 0.5f, Height * 0.5f)
             };

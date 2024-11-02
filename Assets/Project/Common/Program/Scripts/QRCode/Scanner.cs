@@ -21,6 +21,13 @@ namespace Common.QRCode
             this.UpdateAsObservable().Subscribe(_ => UpdateQrScanResult()).AddTo(this);
         }
 
+        private void OnDestroy()
+        {
+            Debug.Log("destoroy");
+
+            _model.CameraTexture.Stop();
+        }
+
         private void UpdateQrScanResult()
         {
             if (_model.IsScannerEnable)

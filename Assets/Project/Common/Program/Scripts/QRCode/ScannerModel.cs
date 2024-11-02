@@ -14,11 +14,11 @@ namespace Common.QRCode
 
         public ScannerModel()
         {
-            Width = 200;
-            Height = 200;
-            CameraTexture = new(WebCamTexture.devices[1].name, Width, Height)
+            Width = 500;
+            Height = 500;
+            CameraTexture = new(WebCamTexture.devices[0].name, Width, Height)
             {
-                autoFocusPoint = new Vector2(Width * 0.5f, Height * 0.5f)
+                autoFocusPoint = new Vector2(Width * 0.2f, Height * 0.2f)
             };
         }
     }

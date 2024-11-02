@@ -15,6 +15,7 @@ using System.Threading;
 using Project.BattleField.Script.GameEnd;
 using Project.GameEnd.Program.Scripts;
 using Project.InGame.Program.Scripts.Audio;
+using Project.InGame.Program.Scripts.Tehuda;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -44,6 +45,7 @@ namespace BattleField.Script.Progress
         [SerializeField] private PlayableDirector fightDirector = null!;
         [SerializeField] private SpriteRenderer _playerIcon;
         [SerializeField] private SpriteRenderer _enemyIcon;
+        [SerializeField] private TehudaPresenter tehuda = null!;
 
         //[SerializeField] private GameEndText _gameEndText;
         [SerializeField] private int turn;
@@ -98,6 +100,7 @@ namespace BattleField.Script.Progress
                 _round.RoundCount(_turn);
                 _round_Timeline.TimelinePlay();
                 await UniTask.WaitUntil(() => _round_Timeline.IsDone());
+                tehuda.SetImages(_enemyIdSet, _enemyPresenter.Cards);
                 await UniTask.WhenAll(_turnPresenter.HandleTurn(ct));
                 _playerCard = _playerPresenter.Cards.Last();
                 _playerIcon.sprite = Resources.Load<Sprite>("Images/"+_playerCard.ImageId);

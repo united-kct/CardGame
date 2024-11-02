@@ -45,6 +45,9 @@ namespace BattleField.Script.Janken {
                 case CardHand.Paper:
                     Pa_(type);
                     break;
+                case CardHand.Yoshimoto:
+                    _jankenSelector.sprite = _yoshimoto;
+                    break;
             }
         }
     }

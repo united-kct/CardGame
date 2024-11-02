@@ -93,6 +93,9 @@ namespace BattleField.Script.Progress
         private async UniTaskVoid Role(CancellationToken ct)
         {
             var _enemyIdSet = _enemyDataSets.EnemySetReceiver();
+            foreach(var _enemyId in _enemyIdSet) {
+                Debug.Log(_enemyId);
+            } Debug.Log("");
             while (_turn <= _maxTurn)
             {
                 if (_turn == _maxTurn)
@@ -107,6 +110,7 @@ namespace BattleField.Script.Progress
 
                 roundSeAudioSource.Play(_turn);
                 _enemyCardID = _enemyDataSets.EnemyIDReceiver(_enemyIdSet, _enemyPresenter.Cards);
+                Debug.Log(_enemyCardID);
                 _playerIcon.sprite = Resources.Load<Sprite>("Images/null");
                 _enemyIcon.sprite = Resources.Load<Sprite>("Images/null");
                 _round.RoundCount(_turn);

@@ -75,7 +75,23 @@ namespace BattleField.Script.Effect {
                     _level3FireEffect.TimelinePlay();
                     _level3WaterEffect.TimelinePlay();
                     _level3GrassEffect.TimelinePlay();
-                    await UniTask.WaitUntil(() => _level3GrassEffect.IsDone());
+                    _level2FireEffect.TimelinePlay();
+                    _level2WaterEffect.TimelinePlay();
+                    _level2GrassEffect.TimelinePlay();
+                    _level1FireEffect.TimelinePlay();
+                    _level1GrassEffect.TimelinePlay();
+                    _level1WaterEffect.TimelinePlay();
+                    await UniTask.WhenAll(
+                        UniTask.WaitUntil(() => _level3GrassEffect.IsDone()),
+                        UniTask.WaitUntil(() => _level3FireEffect.IsDone()),
+                        UniTask.WaitUntil(() => _level3WaterEffect.IsDone()),
+                        UniTask.WaitUntil(() => _level2FireEffect.IsDone()),
+                        UniTask.WaitUntil(() => _level2WaterEffect.IsDone()),
+                        UniTask.WaitUntil(() => _level2GrassEffect.IsDone()),
+                        UniTask.WaitUntil(() => _level1FireEffect.IsDone()),
+                        UniTask.WaitUntil(() => _level1WaterEffect.IsDone()),
+                        UniTask.WaitUntil(() => _level1GrassEffect.IsDone())
+                        );
                 }
         }
     }
